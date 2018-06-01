@@ -12,7 +12,7 @@ Contents:
    :maxdepth: 2
 
    solr_main
-
+   groovy_main
 
 
 Indices and tables

@@ -23,7 +23,9 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="apache_solr 7.3.1 documentation" href="index.html" /> 
+    <link rel="top" title="apache_solr 7.3.1 documentation" href="index.html" />
+    <link rel="next" title="Apache Groovy" href="groovy_main.html" />
+    <link rel="prev" title="Welcome to apache_solr’s documentation!" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -32,6 +34,12 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="groovy_main.html" title="Apache Groovy"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to apache_solr’s documentation!"
+             accesskey="P">previous</a> |</li>
         <li><a href="index.html">apache_solr 7.3.1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -43,33 +51,124 @@
             
   <div class="section" id="apache-solr-search">
 <h1>Apache Solr Search<a class="headerlink" href="#apache-solr-search" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview-and-summary">
+<h2>Overview and Summary<a class="headerlink" href="#overview-and-summary" title="Permalink to this headline">¶</a></h2>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut dictum diam fermentum accumsan commodo. Suspendisse ut imperdiet leo. Vivamus quis cursus elit. Vestibulum vestibulum sapien at enim tincidunt tempor. Suspendisse potenti. Vivamus nec ornare diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec facilisis turpis. Pellentesque nunc nisi, tincidunt eget cursus quis, auctor imperdiet erat. Morbi quis mauris ligula. Suspendisse metus nunc, vulputate in rutrum non, vehicula vitae dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla arcu augue, placerat nec sem nec, aliquet placerat erat. Integer rutrum lectus eget massa fermentum, et lacinia sem tincidunt. Etiam id erat diam. Fusce metus dui, tristique eu justo eu, finibus aliquam nisl.</p>
 <p>Mauris id vehicula leo, non aliquam eros. Suspendisse imperdiet lorem quis mauris pulvinar, vitae fringilla massa ultrices. Donec a leo non felis hendrerit tristique vel sit amet mauris. Fusce non pharetra libero. Nulla in augue quis ipsum blandit gravida. Nunc at ex dictum, venenatis odio eu, suscipit enim. Donec facilisis ante vitae leo viverra, quis tempus sapien fringilla. Morbi fermentum feugiat dolor. Phasellus mattis id tortor eget aliquet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam a lacus ante. Nunc non iaculis odio, ut consectetur erat. Integer ac tempor ipsum, at dapibus quam. Sed diam nibh, eleifend vitae malesuada in, lobortis at mauris. Duis eu lorem erat. Proin est leo, porta sed augue rhoncus, luctus finibus odio.</p>
+<img alt="_images/basic_server_architecture.PNG" src="_images/basic_server_architecture.PNG" />
+<p>Maecenas vehicula dapibus odio, in faucibus dolor fringilla nec. Mauris vestibulum urna erat, a sodales est viverra at. Sed libero nulla, sodales nec maximus vel, pretium quis tortor. Fusce tellus eros, vehicula ut imperdiet mollis, finibus iaculis enim. Donec id mi mauris. Suspendisse molestie elementum feugiat. Nullam et interdum odio, vestibulum placerat arcu. Fusce laoreet, lacus ut ullamcorper mollis, leo odio gravida ex, pulvinar vestibulum felis tellus ac arcu. Integer nec enim cursus, tristique risus quis, volutpat velit. Aenean pretium elit eros, non hendrerit mauris euismod ac. Ut vitae posuere tellus, nec lobortis ligula. Duis arcu mi, suscipit non dui vel, ullamcorper imperdiet lectus.</p>
+</div>
 <div class="section" id="dependencies-and-requirements">
 <h2>Dependencies and Requirements<a class="headerlink" href="#dependencies-and-requirements" title="Permalink to this headline">¶</a></h2>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut dictum diam fermentum accumsan commodo. Suspendisse ut imperdiet leo. Vivamus quis cursus elit. Vestibulum vestibulum sapien at enim tincidunt tempor. Suspendisse potenti. Vivamus nec ornare diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec facilisis turpis. Pellentesque nunc nisi, tincidunt eget cursus quis, auctor imperdiet erat. Morbi quis mauris ligula. Suspendisse metus nunc, vulputate in rutrum non, vehicula vitae dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla arcu augue, placerat nec sem nec, aliquet placerat erat. Integer rutrum lectus eget massa fermentum, et lacinia sem tincidunt. Etiam id erat diam. Fusce metus dui, tristique eu justo eu, finibus aliquam nisl.</p>
-<p>Dependencies:</p>
-<blockquote>
-<div><ul class="simple">
-<li>Apache Solr</li>
-<li>Apache Tika</li>
-<li>Groovy</li>
-<li>Docker</li>
-<li>Kubernetes</li>
+<p>Since there is a Dockerfile included within this repository, all the dependencies will be automatically included into the project.
+The dockerfile includes the following dependencies (the versions may change over time).
+This instance of Solr within a Docker and orchestrated by local instance of Kubernetes was developed on Ubuntu Server 16 LTS. This docker repository can be found at <a class="reference external" href="https://hub.docker.com/r/pandurx/solr-service/">https://hub.docker.com/r/pandurx/solr-service/</a>.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="32%" />
+<col width="3%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Virtual Machine Specifications</th>
+<th class="head">&nbsp;</th>
+<th class="head">Dependencies</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td><ul class="first last simple">
+<li>Ubuntu Server 16 LTS</li>
+<li>4GB RAM</li>
+<li>100GB ROM</li>
+<li>VMware Workstation 14 Player</li>
 </ul>
-</div></blockquote>
-<p>Requirements:</p>
-<blockquote>
-<div><ul class="simple">
-<li>Ubuntu 17 LTS</li>
-<li>2GB RAM</li>
-<li>50GB MEM</li>
-</ul>
-</div></blockquote>
+</td>
+<td>&nbsp;</td>
+<td><table border="1" class="first last docutils">
+<colgroup>
+<col width="27%" />
+<col width="16%" />
+<col width="57%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Library</th>
+<th class="head">Version</th>
+<th class="head">Link</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Apache Solr</td>
+<td>7.3.0</td>
+<td><a class="reference external" href="http://lucene.apache.org/solr/">http://lucene.apache.org/solr/</a></td>
+</tr>
+<tr class="row-odd"><td>Apache Groovy</td>
+<td>3.0.0</td>
+<td><a class="reference external" href="http://groovy-lang.org">http://groovy-lang.org</a></td>
+</tr>
+<tr class="row-even"><td>Apache Tika</td>
+<td>1.17</td>
+<td><a class="reference external" href="https://tika.apache.org/">https://tika.apache.org/</a></td>
+</tr>
+<tr class="row-odd"><td>Apache Maven</td>
+<td>3.5.2</td>
+<td><a class="reference external" href="https://maven.apache.org/">https://maven.apache.org/</a></td>
+</tr>
+<tr class="row-even"><td>Open JDK</td>
+<td>1.8.0</td>
+<td><a class="reference external" href="http://openjdk.java.net/">http://openjdk.java.net/</a></td>
+</tr>
+<tr class="row-odd"><td>Docker CE</td>
+<td>&nbsp;</td>
+<td><a class="reference external" href="https://www.docker.com/">https://www.docker.com/</a></td>
+</tr>
+<tr class="row-even"><td>Kubernetes</td>
+<td>&nbsp;</td>
+<td><a class="reference external" href="https://kubernetes.io/">https://kubernetes.io/</a></td>
+</tr>
+<tr class="row-odd"><td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-even"><td colspan="3">Updated on June 1 2018</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div class="section" id="commands">
-<h2>Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h2>
-<p><tt class="docutils literal"><span class="pre">$</span> <span class="pre">./solr</span> <span class="pre">start</span> <span class="pre">-f</span></tt></p>
+<div class="section" id="installation-and-implementation">
+<h2>Installation and Implementation<a class="headerlink" href="#installation-and-implementation" title="Permalink to this headline">¶</a></h2>
+<p>Maecenas vehicula dapibus odio, in faucibus dolor fringilla nec. Mauris vestibulum urna erat, a sodales est viverra at. Sed libero nulla, sodales nec maximus vel, pretium quis tortor. Fusce tellus eros, vehicula ut imperdiet mollis, finibus iaculis enim. Donec id mi mauris. Suspendisse molestie elementum feugiat. Nullam et interdum odio, vestibulum placerat arcu. Fusce laoreet, lacus ut ullamcorper mollis, leo odio gravida ex, pulvinar vestibulum felis tellus ac arcu. Integer nec enim cursus, tristique risus quis, volutpat velit. Aenean pretium elit eros, non hendrerit mauris euismod ac. Ut vitae posuere tellus, nec lobortis ligula. Duis arcu mi, suscipit non dui vel, ullamcorper imperdiet lectus.</p>
+<div class="section" id="installing-docker">
+<h3>Installing Docker<a class="headerlink" href="#installing-docker" title="Permalink to this headline">¶</a></h3>
+<p>Nam ut risus id ipsum blandit semper in sit amet ipsum. Ut tincidunt, justo at sagittis venenatis, turpis enim blandit metus, sit amet tempus lacus ex in turpis. Phasellus vitae aliquet quam, ultrices laoreet sapien. Cras varius ipsum nec enim porttitor sagittis. Quisque varius lacus pellentesque accumsan vestibulum. Integer nisi risus, maximus ut blandit in, finibus non nunc. Ut id eros et erat laoreet ornare malesuada sed risus. Mauris efficitur porttitor tempus. Donec odio neque, bibendum ac tempus non, viverra ac quam. Mauris malesuada luctus ultricies. Donec non lacus sagittis, fermentum libero ut, venenatis sapien. Aliquam semper varius orci. Donec eu odio porttitor, bibendum metus ullamcorper, hendrerit dui. Aenean sed placerat neque, in posuere nisl.</p>
+<p>Nullam sed sagittis lorem. Curabitur mattis ut quam sit amet ultricies. Praesent eget tristique ex. Sed dignissim mauris nec nisi feugiat, eu euismod odio semper. Maecenas quis posuere ante. Sed quis egestas lorem. Aliquam non arcu sit amet leo dapibus interdum. Vestibulum id blandit eros, id porttitor erat. Pellentesque vitae ipsum et risus ornare vulputate aliquet vulputate nisi. Quisque sed faucibus magna, a aliquam mauris. Nulla sapien ligula, dapibus sed venenatis laoreet, rhoncus vitae quam. Suspendisse nec quam ultrices, rhoncus lacus nec, cursus lorem. Mauris maximus quam ante, hendrerit porta nulla porta quis. Fusce porta diam ut diam imperdiet imperdiet.</p>
+</div>
+<div class="section" id="installing-kubernetes-local-virtual-machine-optional">
+<h3>Installing Kubernetes (local virtual machine, optional)<a class="headerlink" href="#installing-kubernetes-local-virtual-machine-optional" title="Permalink to this headline">¶</a></h3>
+<p>Nam ut risus id ipsum blandit semper in sit amet ipsum. Ut tincidunt, justo at sagittis venenatis, turpis enim blandit metus, sit amet tempus lacus ex in turpis. Phasellus vitae aliquet quam, ultrices laoreet sapien. Cras varius ipsum nec enim porttitor sagittis. Quisque varius lacus pellentesque accumsan vestibulum. Integer nisi risus, maximus ut blandit in, finibus non nunc. Ut id eros et erat laoreet ornare malesuada sed risus. Mauris efficitur porttitor tempus. Donec odio neque, bibendum ac tempus non, viverra ac quam. Mauris malesuada luctus ultricies. Donec non lacus sagittis, fermentum libero ut, venenatis sapien. Aliquam semper varius orci. Donec eu odio porttitor, bibendum metus ullamcorper, hendrerit dui. Aenean sed placerat neque, in posuere nisl.</p>
+<p>Nullam sed sagittis lorem. Curabitur mattis ut quam sit amet ultricies. Praesent eget tristique ex. Sed dignissim mauris nec nisi feugiat, eu euismod odio semper. Maecenas quis posuere ante. Sed quis egestas lorem. Aliquam non arcu sit amet leo dapibus interdum. Vestibulum id blandit eros, id porttitor erat. Pellentesque vitae ipsum et risus ornare vulputate aliquet vulputate nisi. Quisque sed faucibus magna, a aliquam mauris. Nulla sapien ligula, dapibus sed venenatis laoreet, rhoncus vitae quam. Suspendisse nec quam ultrices, rhoncus lacus nec, cursus lorem. Mauris maximus quam ante, hendrerit porta nulla porta quis. Fusce porta diam ut diam imperdiet imperdiet.</p>
+</div>
+</div>
+<div class="section" id="commands-explained">
+<h2>Commands Explained<a class="headerlink" href="#commands-explained" title="Permalink to this headline">¶</a></h2>
+<p>Maecenas vehicula dapibus odio, in faucibus dolor fringilla nec. Mauris vestibulum urna erat, a sodales est viverra at. Sed libero nulla, sodales nec maximus vel, pretium quis tortor. Fusce tellus eros, vehicula ut imperdiet mollis, finibus iaculis enim. Donec id mi mauris. Suspendisse molestie elementum feugiat. Nullam et interdum odio, vestibulum placerat arcu. Fusce laoreet, lacus ut ullamcorper mollis, leo odio gravida ex, pulvinar vestibulum felis tellus ac arcu. Integer nec enim cursus, tristique risus quis, volutpat velit. Aenean pretium elit eros, non hendrerit mauris euismod ac. Ut vitae posuere tellus, nec lobortis ligula. Duis arcu mi, suscipit non dui vel, ullamcorper imperdiet lectus.</p>
+<p>If you are currently logged in as root user on the linux machine, you might run into an error stating that you cannot start the solr service as that user. Typically, it is much safer to run the solr server with a different user account that has only access necessary directories and the access rights to run specific services that is required for the search functionality.</p>
+<p>If the search engine is currently in development or testing, the service can be started with a root user with an additional parameter passed in. Otherwise, omit the <tt class="docutils literal"><span class="pre">-f</span></tt> flag if the service will be started with a non-root user.</p>
+<p><strong>Please take note that the script to run the engine is in the ``/opt/solr/bin`` directory. The example below assumes that the the solr script is in the current directory</strong></p>
+<p>running solr as a root user
+<tt class="docutils literal"><span class="pre">root&#64;ubuntu:~#</span> <span class="pre">./solr</span> <span class="pre">start</span> <span class="pre">-f</span></tt>
+<tt class="docutils literal"><span class="pre">root&#64;ubuntu:~#</span> <span class="pre">./solr</span> <span class="pre">stop</span></tt>
+<tt class="docutils literal"><span class="pre">root&#64;ubuntu:~#</span> <span class="pre">./solr</span> <span class="pre">restart</span> <span class="pre">-f</span></tt></p>
+<p>running solr as a non-root user
+<tt class="docutils literal"><span class="pre">solr&#64;ubuntu:~#</span> <span class="pre">./solr</span> <span class="pre">start</span></tt></p>
 </div>
 <div class="section" id="inline-markup">
 <h2><strong>Inline Markup</strong><a class="headerlink" href="#inline-markup" title="Permalink to this headline">¶</a></h2>
@@ -88,13 +187,25 @@ gives you super user powers!</p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Apache Solr Search</a><ul>
+<li><a class="reference internal" href="#overview-and-summary">Overview and Summary</a></li>
 <li><a class="reference internal" href="#dependencies-and-requirements">Dependencies and Requirements</a></li>
-<li><a class="reference internal" href="#commands">Commands</a></li>
+<li><a class="reference internal" href="#installation-and-implementation">Installation and Implementation</a><ul>
+<li><a class="reference internal" href="#installing-docker">Installing Docker</a></li>
+<li><a class="reference internal" href="#installing-kubernetes-local-virtual-machine-optional">Installing Kubernetes (local virtual machine, optional)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#commands-explained">Commands Explained</a></li>
 <li><a class="reference internal" href="#inline-markup"><strong>Inline Markup</strong></a></li>
 </ul>
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to apache_solr&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="groovy_main.html"
+                        title="next chapter">Apache Groovy</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/solr_main.txt"
@@ -123,6 +234,12 @@ gives you super user powers!</p>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="groovy_main.html" title="Apache Groovy"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to apache_solr’s documentation!"
+             >previous</a> |</li>
         <li><a href="index.html">apache_solr 7.3.1 documentation</a> &raquo;</li> 
       </ul>
     </div>
