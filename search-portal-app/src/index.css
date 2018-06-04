@@ -1,0 +1,139 @@
+body {
+  background-color: #FFCC00;
+  padding: 20px;
+  margin: 0;
+}
+h1, h2, p, ul, li {
+  font-family: sans-serif;
+}
+ul.header li {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+}
+ul.header {
+  background-color: #111;
+  padding: 0;
+}
+ul.header li a {
+  color: #FFF;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 20px;
+  display: inline-block;
+}
+.content {
+  background-color: #FFF;
+  padding: 20px;
+}
+.content h2 {
+  padding: 0;
+  margin: 0;
+}
+.content li {
+  margin-bottom: 10px;
+}
+
+.active {
+  background-color: #0099FF;
+}
+
+.searchArea {
+ display: inline-block; 
+}
+
+
+.searchResult {
+  font-family: arial, sans-serif;
+  position:relative;
+  display:block;
+  line-height: 1.2;
+  width:40%;
+  margin-bottom: 26px;
+  border: 5px solid rgba(219, 219, 219, .5);
+  padding: 15px 5px 15px 5px;
+
+}
+
+.searchResultTitle {
+  font-family: arial, sans-serif;
+  line-height: 1.2;
+  text-decoration: none;
+  font-size: 18px;
+  margin: 0;  
+  font-weight: normal;
+
+}
+
+.searchResultURL {
+  font-style: normal;
+}
+
+.searchResultDescription {
+  font-size: small;
+  font-weight: normal;
+}
+
+.searchResultCite {
+  white-space:nowrap;
+  font-weight: normal;
+  font-size: medium;
+}
+
+.searchResultAdditionalInfo {
+  margin-top: 0px;
+  line-height: 18px;
+  font-size: small;
+  font-family: aria, sans-serif;
+}
+
+
+.resultsInformation {
+  padding: 16px 0px 0px 8px;
+  line-height:43px;
+  font-size: small;
+  font-family: arial, sans-serif;
+  color: #808080;
+  white-space: nowrap; 
+}
+
+.searchForm {
+
+}
+
+
+
+
+.searchInput {
+    border-color: #333;
+    border-width: 3px;
+    border-style: solid;
+    color: #333333;
+    font-size: 15px;
+    font-weight: bold;
+    height: 30px;
+    padding: 0 5px 0 7px;
+    width: 80%;
+    margin-top: 5px;
+
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+.searchButton {
+    padding: 5px;
+    border: 4px #20A6FF solid;
+    background-color: #20A6FF;
+    width: 36px;
+    height: 36px;
+    color: transparent;
+    line-height: 0;
+    position: relative;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+.white_space {
+}
+
+
