@@ -50,8 +50,9 @@ ul.header li a {
   line-height: 1.2;
   width:40%;
   margin-bottom: 26px;
-  border: 5px solid rgba(219, 219, 219, .5);
+  //border: 5px solid rgba(219, 219, 219, .5);
   padding: 15px 5px 15px 5px;
+  word-wrap: normal;
 
 }
 
@@ -72,12 +73,15 @@ ul.header li a {
 .searchResultDescription {
   font-size: small;
   font-weight: normal;
+  word-wrap: normal;
 }
 
 .searchResultCite {
-  white-space:nowrap;
+  white-space: nowrap;
+  color: #006621;
   font-weight: normal;
-  font-size: medium;
+  line-height: 16px;
+  font-size: 14px;
 }
 
 .searchResultAdditionalInfo {
@@ -94,7 +98,7 @@ ul.header li a {
   font-size: small;
   font-family: arial, sans-serif;
   color: #808080;
-  white-space: nowrap; 
+  //white-space: nowrap; 
 }
 
 .searchForm {
@@ -102,35 +106,42 @@ ul.header li a {
 }
 
 
+em {
+    background-color: #d5f4e6;
+}
 
+.searchBar {
+  border-color: #333;
+  border-width: 2px;
+  border-style: solid;
+  width: 50%;
+
+  padding-top: 5px;
+  padding-right: 0px;
+  padding-bottom:5px;
+  padding-left:15px;
+}
 
 .searchInput {
-    border-color: #333;
-    border-width: 3px;
-    border-style: solid;
-    color: #333333;
-    font-size: 15px;
-    font-weight: bold;
-    height: 30px;
-    padding: 0 5px 0 7px;
-    width: 80%;
-    margin-top: 5px;
+  border: 0;
 
-    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  outline:none;
+  font-size: 15px;
+  font-weight: bold;
+  height: 30px;
+  padding: 1px 0px 1px 5px;
+  width: 93%;
+  
 }
 
 .searchButton {
-    padding: 5px;
-    border: 4px #20A6FF solid;
-    background-color: #20A6FF;
-    width: 36px;
-    height: 36px;
-    color: transparent;
-    line-height: 0;
-    position: relative;
+  width: 36px;
+  height: 36px;
 
-    background-repeat: no-repeat;
-    background-position: center center;
+  background-color: Transparent;
+  border: none;
+  cursor:pointer;
+
 }
 
 .white_space {

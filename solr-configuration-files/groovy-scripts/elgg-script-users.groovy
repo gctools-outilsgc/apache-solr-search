@@ -37,7 +37,8 @@ while (!end_loop) {
 			"username": "$result.username", 
 			"email": "$result.email",
 			"date_created": "$result.date_created",
-			"date_modified": "$result.date_modified"
+			"date_modified": "$result.date_modified",
+			"platform": "elgg"
 		])
 
 		def process = [ 'bash', '-c', "curl -v -k -X POST -H \"Content-Type: application/json\" --data-binary '" + json_string.toString() + "' http://192.168.1.18:8983/solr/elgg-core/update/json/docs?commit=true" ].execute().text
