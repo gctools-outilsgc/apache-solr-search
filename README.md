@@ -9,15 +9,15 @@
 
 [Apache Solr](http://lucene.apache.org/solr/guide/--)
 
-...This is the main engine that will index the contents and store in the elgg-core directory within the data folder. Solr must have access to this core in order to store index and log warnings and errors. The configuration file is located within the solr-configuration-files directory.
+⋅⋅⋅This is the main engine that will index the contents and store in the elgg-core directory within the data folder. Solr must have access to this core in order to store index and log warnings and errors. The configuration file is located within the solr-configuration-files directory.
 
 [Docker Community Edition](https://docs.docker.com/install/linux/docker-ce/ubuntu/#prerequisites)
 	
-...This instance has been configured to run inside a Docker container that contains all the dependencies and libraries that are used. The Dockerfile can be found in docker-configuration-files.
+⋅⋅⋅This instance has been configured to run inside a Docker container that contains all the dependencies and libraries that are used. The Dockerfile can be found in docker-configuration-files.
 
 [Kubernetes](https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational)
 	
-...Still in process to be worked on, but there are configuration files for Kubernetes deployment developed, it can be found in the kubernetes-configuration-files directory.
+⋅⋅⋅Still in process to be worked on, but there are configuration files for Kubernetes deployment developed, it can be found in the kubernetes-configuration-files directory.
 
 
 ## Specifications and Dependencies
@@ -47,19 +47,19 @@
 The following needs to be installed:
 - elgg
 
-...You just need an instance of Elgg so that we have something we can crawl. The plugin for this to work is in the ```elgg-plugin``` directory which also require ```web services``` to be enabled on elgg. This basically generates REST API for the indexing portion of this project. Will require LAMP (Apache, MySQL, PHP) stack to be installed for this application. Please read up on the documentation for [elgg installation](http://learn.elgg.org/en/2.0/intro/install.html).
+⋅⋅⋅You just need an instance of Elgg so that we have something we can crawl. The plugin for this to work is in the ```elgg-plugin``` directory which also require ```web services``` to be enabled on elgg. This basically generates REST API for the indexing portion of this project. Will require LAMP (Apache, MySQL, PHP) stack to be installed for this application. Please read up on the documentation for [elgg installation](http://learn.elgg.org/en/2.0/intro/install.html).
 
 - reactjs
 
-...A ReactJS project is also included in this repository in the ```search-portal-app```, so we can test the resultset that gets retrieved from Apache Solr.
+⋅⋅⋅A ReactJS project is also included in this repository in the ```search-portal-app```, so we can test the resultset that gets retrieved from Apache Solr.
 
 - apache solr
 
-...The meat of the repository, it just contains the configuration files. You may need to create the index folder and give the user read and write access to the entire configuration directory since the engine will be creating and modifying log files and indexes.
+⋅⋅⋅The meat of the repository, it just contains the configuration files. You may need to create the index folder and give the user read and write access to the entire configuration directory since the engine will be creating and modifying log files and indexes.
 
 - apache groovy
 
-...This is a scripting mechanism that you can run on a daily basis using crontab (linux) or scheduleder (windows), this can be found in the directory called ```solr-configuration-files```.
+⋅⋅⋅This is a scripting mechanism that you can run on a daily basis using crontab (linux) or scheduleder (windows), this can be found in the directory called ```solr-configuration-files```.
 
 
 ### (Optional) Minimum Viable Product - Search Portal
@@ -93,6 +93,8 @@ To get started with the ReachJS application, you need to be in the search-portal
 
 ### Prerequisites
 * Groovy
+
+**running groovy scripts**
 
 - ```$ groovy your-groovy-script.groovy```
 
