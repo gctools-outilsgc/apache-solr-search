@@ -47,7 +47,7 @@ This instance of Solr within a Docker and orchestrated by local instance of Kube
 |                                 |        |               |         |                                | |
 |                                 |        +---------------+---------+--------------------------------+ |
 |                                 |                                                                     |
-+---------------------------------+--------------------------------------------------------------------+
++---------------------------------+---------------------------------------------------------------------+
 | Updated on June 1 2018                                                                                |
 +-------------------------------------------------------------------------------------------------------+
 
@@ -84,11 +84,15 @@ If the search engine is currently in development or testing, the service can be 
 **Please take note that the script to run the engine is in the ``/opt/solr/bin`` directory. The example below assumes that the the solr script is in the current directory**
 
 running solr as a root user
+
 ``root@ubuntu:~# ./solr start -f``
+
 ``root@ubuntu:~# ./solr stop``
+
 ``root@ubuntu:~# ./solr restart -f``
 
 running solr as a non-root user
+
 ``solr@ubuntu:~# ./solr start``
 
 

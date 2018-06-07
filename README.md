@@ -131,9 +131,6 @@ $ npm install --save react-fontawesome
 
 ## Running Groovy Scripts as your indexer
 
-### Prerequisites
-* Groovy
-
 ```
 # running groovy scripts
 $ groovy your-groovy-script.groovy
@@ -207,18 +204,17 @@ $ docker ps
 
 **This is still work in progress**
 
-install kubernetes
+```
+# install kubernetes
+$ apt-get install
 
-- ```$ apt-get install ```
+# run kubernetes pod deployment
+$ kubectl portal-service --image=portal-service --port=-- --host=XXXX
 
-run kubernetes pod deployment
-
-- ```$ kubectl portal-service --image=portal-service --port=-- --host=------```
-
-remove and clean up the service
-
-- ```$ kubectl kill portal-service-### ```
-- ```$ kubectl delete deployment portal-service ```
+# remove and clean up the service
+$ kubectl kill portal-service-###
+$ kubectl delete deployment portal-service
+```
 
 
 ## Contribution
