@@ -1,8 +1,5 @@
 # Apache Solr instance on Elgg
 
-##WORK IN PROGRESS
-
-
 [Full documentation can be found here](https://apache-solr-search.readthedocs.io/en/latest/)
 
 **For official documentations of all the libraries that are used for this instance of Apache Solr, see the list below.**
@@ -44,6 +41,18 @@
 
 ### Directories Explained
 
+docker-configuration-files: contains the Dockerfile needed to create and run the container for Solr
+
+docs: contains the documentation for the entire project, it is currently hosted and can be viewed [here](https://apache-solr-search.readthedocs.io/en/latest/)
+
+elgg-plugin: contains the plugin that can be installed on an elgg instance, it basically generates REST API that retrieves all the contents and displays it in json format
+
+kubernetes-configuration-files: contains all the files required to run the project in a pod
+
+search-portal-app: contains the reactjs project that formats the search results thats retrieved from solr
+
+solr-configuration-files: contains the groovy scripts that will be run for indexing and the core that will be used to organize the index
+
 
 ### (Optional) Manual Installation, without Docker or Kubernetes
 
@@ -54,7 +63,7 @@ The following needs to be installed:
 
 - reactjs
 
-   A ReactJS project is also included in this repository in the ```search-portal-app```, so we can test the resultset that gets retrieved from Apache Solr. You can view the [Minimum Viable Product - Search Portal](https://github.com/Services-Sandbox/solr#optional-minimum-viable-product---search-portal) section on installation and running the app.
+   A ReactJS project is also included in this repository in the ```search-portal-app```, so we can test the resultset that gets retrieved from Apache Solr. Please consult the **[Minimum Viable Product - Search Portal](https://github.com/Services-Sandbox/solr#optional-minimum-viable-product---search-portal)** section on installation and running the app.
 
 - apache solr
 
@@ -83,6 +92,16 @@ The following needs to be installed:
 - apache groovy
 
    This is a scripting mechanism that you can run on a daily basis using crontab (linux) or scheduleder (windows), this can be found in the directory called ```solr-configuration-files```.
+
+   ```
+   # installation
+   $ curl -s get.sdkman.io | bash
+   $ source "$HOME/.sdkman/bin/sdkman-init.sh"
+   $ sdk install groovy
+
+   # running groovy scripts
+   $ groovy script-name-here.groovy
+   ```
 
 
 ### (Optional) Minimum Viable Product - Search Portal
