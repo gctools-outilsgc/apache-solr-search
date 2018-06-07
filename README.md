@@ -82,24 +82,32 @@ To get started with the ReachJS application, you need to be in the search-portal
 
 **install nodejs**
 
-- ```$ curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh ```
-- ```$ sudo bash nodesource_setup.sh ```
-- ```$ apt-get install nodejs ```
-- ```$ npm -v ```
+   ```
+   $ curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
+   $ sudo bash nodesource_setup.sh
+   $ apt-get install nodejs
+   $ npm -v
+   ```
 
 **compile the code**
 
-- ```$ npm install -g create-react-app ```
-- ```$ create-react-app search-portal```
-- ```$ cd search-portal/ ```
+   ```
+   $ npm install -g create-react-app
+   $ create-react-app search-portal
+   $ cd search-portal/
+   ```
 
 **start the application**
 
-- ```$ npm start ```
+   ```
+   $ npm start
+   ```
 
 **to import libraries, they must be in the npm repository**
 
-- ```$ npm install --save react-fontawesome```
+   ```
+   $ npm install --save react-fontawesome
+   ```
 
 ## Running Groovy Scripts as your indexer
 
