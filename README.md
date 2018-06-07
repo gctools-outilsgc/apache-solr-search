@@ -46,13 +46,20 @@
 
 The following needs to be installed:
 - elgg
+
 ...You just need an instance of Elgg so that we have something we can crawl. The plugin for this to work is in the ```elgg-plugin``` directory which also require ```web services``` to be enabled on elgg. This basically generates REST API for the indexing portion of this project. Will require LAMP (Apache, MySQL, PHP) stack to be installed for this application. Please read up on the documentation for [elgg installation](http://learn.elgg.org/en/2.0/intro/install.html).
+
 - reactjs
+
 ...A ReactJS project is also included in this repository in the ```search-portal-app```, so we can test the resultset that gets retrieved from Apache Solr.
+
 - apache solr
+
 ...The meat of the repository, it just contains the configuration files. You may need to create the index folder and give the user read and write access to the entire configuration directory since the engine will be creating and modifying log files and indexes.
+
 - apache groovy
-...This is a scripting mechanism that you can run on a daily basis using crontab (linux) or scheduleder (windows).
+
+...This is a scripting mechanism that you can run on a daily basis using crontab (linux) or scheduleder (windows), this can be found in the directory called ```solr-configuration-files```.
 
 
 ### (Optional) Minimum Viable Product - Search Portal
