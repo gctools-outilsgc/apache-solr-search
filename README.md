@@ -5,7 +5,7 @@
 
 [Full documentation can be found here](https://apache-solr-search.readthedocs.io/en/latest/)
 
-** For official documentations of all the libraries that are used for this instance of Apache Solr, see the list below.**
+**For official documentations of all the libraries that are used for this instance of Apache Solr, see the list below.**
 
 [Apache Solr](http://lucene.apache.org/solr/guide/--)
 
@@ -51,11 +51,23 @@ The following needs to be installed:
 
 - reactjs
 
-   A ReactJS project is also included in this repository in the ```search-portal-app```, so we can test the resultset that gets retrieved from Apache Solr.
+   A ReactJS project is also included in this repository in the ```search-portal-app```, so we can test the resultset that gets retrieved from Apache Solr. You can view the [Minimum Viable Product - Search Portal](https://github.com/Services-Sandbox/solr#optional-minimum-viable-product---search-portal) section on installation and running the app.
 
 - apache solr
 
-   The meat of the repository, it just contains the configuration files. You may need to create the index folder and give the user read and write access to the entire configuration directory since the engine will be creating and modifying log files and indexes.
+   The meat of the repository, it just contains the configuration files. You may need to create the index folder and give the user read and write access to the entire configuration directory since the engine will be creating and modifying log files and indexes. 
+
+   ```
+   # on an instance of linux, the solr app files are all located within /opt/solr/
+   $ cd /opt/solr/bin
+
+   # start the solr app using the solr user (this is recommended), unless you run root, then you will be required to add the flag -force
+   $ sudo -u solr solr start
+   $ sudo ./solr start -force
+
+   Waiting up to 180 seconds to see Solr running on port 8983 [-]
+   Started Solr server on port 8983 (pid=22624). Happy searching!
+   ```
 
 - apache groovy
 
