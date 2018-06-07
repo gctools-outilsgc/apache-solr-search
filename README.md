@@ -1,5 +1,7 @@
 # Apache Solr instance on Elgg
 
+[![Build Status](https://travis-ci.org/Services-Sandbox/solr.svg?branch=master)](https://travis-ci.org/Services-Sandbox/solr)
+
 [Full documentation can be found here](https://apache-solr-search.readthedocs.io/en/latest/)
 
 **For official documentations of all the libraries that are used for this instance of Apache Solr, see the list below.**
