@@ -41,17 +41,17 @@
 
 ### Directories Explained
 
-docker-configuration-files: contains the Dockerfile needed to create and run the container for Solr
+***docker-configuration-files:*** contains the Dockerfile needed to create and run the container for Solr
 
-docs: contains the documentation for the entire project, it is currently hosted and can be viewed [here](https://apache-solr-search.readthedocs.io/en/latest/)
+***docs:*** contains the documentation for the entire project, it is currently hosted and can be viewed [here](https://apache-solr-search.readthedocs.io/en/latest/)
 
-elgg-plugin: contains the plugin that can be installed on an elgg instance, it basically generates REST API that retrieves all the contents and displays it in json format
+***elgg-plugin:*** contains the plugin that can be installed on an elgg instance, it basically generates REST API that retrieves all the contents and displays it in json format
 
-kubernetes-configuration-files: contains all the files required to run the project in a pod
+***kubernetes-configuration-files:*** contains all the files required to run the project in a pod
 
-search-portal-app: contains the reactjs project that formats the search results thats retrieved from solr
+***search-portal-app:*** contains the reactjs project that formats the search results thats retrieved from solr
 
-solr-configuration-files: contains the groovy scripts that will be run for indexing and the core that will be used to organize the index
+***solr-configuration-files:*** contains the groovy scripts that will be run for indexing and the core that will be used to organize the index
 
 
 ### (Optional) Manual Installation, without Docker or Kubernetes
@@ -180,24 +180,22 @@ File: /tmp/crontab
 
 The dockerfile is in the docker-configuration-files directory, run the following commands to build and run
 
-**install docker ce**
+```
+# install docker ce**
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+$ sudo add-apt-repository "deb [arch=amd-] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+$ sudo apt-get update
+$ apt-cache policy docker-ce
+$ sudo apt-get install -y docker-ce
+$ sudo systemctl status docker
 
-- ```$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add - ```
-- ```$ sudo add-apt-repository "deb [arch=amd-] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" ```
-- ```$ sudo apt-get update ```
-- ```$ apt-cache policy docker-ce ```
-- ```$ sudo apt-get install -y docker-ce ```
-- ```$ sudo systemctl status docker ```
+# run docker container
+$ docker build -t search-portal
+$ run --name solr-portal -d -f solr-portal
 
-**run docker container**
-
-- ```$ docker build -t search-portal ```
-- ```$ run --name solr-portal -d -f solr-portal ```
-
-**display status of the container(s)**
-
-- ```$ docker ps ```
-
+# display status of the container(s)
+$ docker ps
+```
 
 ## Using Kubernetes
 
