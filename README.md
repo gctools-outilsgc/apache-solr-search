@@ -226,4 +226,5 @@ Contributions are welcomed
 
 - create gitignore file
 - automate configurations for different ip addresses/url
+- create test scripts
 
