@@ -9,3 +9,5 @@ node_js:
 # configure notifications (email, IRC, campfire etc)
 notifications:
   irc: "irc.freenode.org#yourfavouriteroomfortravis"
+
+  
