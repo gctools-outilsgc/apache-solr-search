@@ -6,7 +6,10 @@ node_js:
   - 6.14
 
 
-script: cd search-portal-app
+# start app, run process in background, wait, run test script
+script: 
+  - cd search-portal-app && npm run start & sleep 5; npm run test-pa11y;
+
 
 # configure notifications (email, IRC, campfire etc)
 notifications:

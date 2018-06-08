@@ -98,7 +98,6 @@ export default class Search extends Component {
           "url": jsonDocs[x].url,
       		"access_id": jsonDocs[x].access_id,
           //"platform": jsonDocs[x].platform
-          //"highlight_en": (jsonResponseHighlight.x).text_en,
           "platform": "elgg"
       	}];
 
