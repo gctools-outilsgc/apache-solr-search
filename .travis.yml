@@ -8,7 +8,8 @@ node_js:
 
 # start app, run process in background, wait, run test script
 script: 
-  - cd search-portal-app && npm run start & sleep 5; npm run test-pa11y;
+  - cd search-portal-app
+  - npm run start & sleep 5; npm run test-pa11y;
 
 
 # configure notifications (email, IRC, campfire etc)
