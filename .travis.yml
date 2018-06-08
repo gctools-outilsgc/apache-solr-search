@@ -3,10 +3,8 @@ matrix:
   include:
     - language: node_js
       node_js: 6.14
-      before_script:
-        - cd search-portal-app
       script:
-        - npm start
+        - cd search-portal-app
 
   - language: php
     php:

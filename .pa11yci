@@ -1,9 +1,0 @@
-{
-	"defaults": {
-		"timeout": 1000
-	},
-	"urls": [
-		"http://localhost:3000/#/search",
-		"http://localhost:3000/#/stuff"
-	]
-}
