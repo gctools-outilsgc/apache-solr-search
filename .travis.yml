@@ -15,6 +15,20 @@ matrix:
       script:
         - cd elgg-plugin/solr_api
 
+    - language: generic
+      sudo: required
+      services: 
+        - docker
+      script:
+        - cd docker-configuration-files
+#     before_install:
+#       - docker info
+#     jobs:
+#       include:
+#         - stage: build, test, deploy
+#           env:
+#           - PROCESS=7.3/slim
+#           script: tools/build_test_push.sh 7.3/slim
 
 # configure notifications (email, IRC, campfire etc)
 notifications:
