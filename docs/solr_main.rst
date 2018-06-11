@@ -3,6 +3,14 @@ Apache Solr Search
 
 Overview and Summary
 --------------------
+
+Documentation can also be referenced in the `Github repository <https://github.com/gctools-outilsgc/apache-solr-search>`
+
+This entire project will contain small components that can be used for testing as minimal viable products. It is not required to have everything running, the main files that this project will use will be in the solr-configuration-files/:
+* /elgg-core/ contains the solr core configuration files that is required to be placed within /opt/solr/server/solr/ and will need the directory /index/ to be created. The entire directory will need to be accessed by solr, root access can be possible if the instance is created in the development environment.
+* /groovy-scripts/ contains the script that will retrieve json data from the web application through REST API and push it into the Solr search engine to create index
+* /jar-files/ contains missing jar files that solr may be missing, there may be some errors that could come up after a fresh install of the engine
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut dictum diam fermentum accumsan commodo. Suspendisse ut imperdiet leo. Vivamus quis cursus elit. Vestibulum vestibulum sapien at enim tincidunt tempor. Suspendisse potenti. Vivamus nec ornare diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec facilisis turpis. Pellentesque nunc nisi, tincidunt eget cursus quis, auctor imperdiet erat. Morbi quis mauris ligula. Suspendisse metus nunc, vulputate in rutrum non, vehicula vitae dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla arcu augue, placerat nec sem nec, aliquet placerat erat. Integer rutrum lectus eget massa fermentum, et lacinia sem tincidunt. Etiam id erat diam. Fusce metus dui, tristique eu justo eu, finibus aliquam nisl.
 
 Mauris id vehicula leo, non aliquam eros. Suspendisse imperdiet lorem quis mauris pulvinar, vitae fringilla massa ultrices. Donec a leo non felis hendrerit tristique vel sit amet mauris. Fusce non pharetra libero. Nulla in augue quis ipsum blandit gravida. Nunc at ex dictum, venenatis odio eu, suscipit enim. Donec facilisis ante vitae leo viverra, quis tempus sapien fringilla. Morbi fermentum feugiat dolor. Phasellus mattis id tortor eget aliquet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam a lacus ante. Nunc non iaculis odio, ut consectetur erat. Integer ac tempor ipsum, at dapibus quam. Sed diam nibh, eleifend vitae malesuada in, lobortis at mauris. Duis eu lorem erat. Proin est leo, porta sed augue rhoncus, luctus finibus odio.

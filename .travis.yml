@@ -3,7 +3,8 @@ matrix:
   include:
 
     - language: node_js
-      node_js: 6.14
+      node_js:
+        - stable
       script:
         - cd search-portal-app
 
@@ -33,5 +34,6 @@ matrix:
 # configure notifications (email, IRC, campfire etc)
 notifications:
   email: 
-    - internalfire5@live.com
+    recipients:
+      - internalfire5@live.com
 
