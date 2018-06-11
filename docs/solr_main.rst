@@ -7,6 +7,7 @@ Overview and Summary
 Documentation can also be referenced in the `Github repository <https://github.com/gctools-outilsgc/apache-solr-search>`
 
 This entire project will contain small components that can be used for testing as minimal viable products. It is not required to have everything running, the main files that this project will use will be in the solr-configuration-files/:
+
 * /elgg-core/ contains the solr core configuration files that is required to be placed within /opt/solr/server/solr/ and will need the directory /index/ to be created. The entire directory will need to be accessed by solr, root access can be possible if the instance is created in the development environment.
 * /groovy-scripts/ contains the script that will retrieve json data from the web application through REST API and push it into the Solr search engine to create index
 * /jar-files/ contains missing jar files that solr may be missing, there may be some errors that could come up after a fresh install of the engine
@@ -33,8 +34,6 @@ This instance of Solr within a Docker and orchestrated by local instance of Kube
 +---------------------------------+---------------------------------------------------------------------+
 | Virtual Machine Specifications  |        Dependencies                                                 |
 +=================================+=====================================================================+
-|                                 |                                                                     |
-+---------------------------------+---------------------------------------------------------------------+
 | * Ubuntu Server 16 LTS          |        +---------------+---------+--------------------------------+ |
 | * 4GB RAM                       |        | Library       | Version | Link                           | |
 | * 100GB ROM                     |        +===============+=========+================================+ |
