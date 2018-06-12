@@ -75,18 +75,17 @@
 <img alt="_images/basic_server_architecture.PNG" src="_images/basic_server_architecture.PNG" />
 <p>In the diagram above, we have the web application server that is connected to both the database server and FTP file server. The web application server will contain the REST API that will be used to retrieve data from either the database and links to files from the FTP server. The APIs (implemented as an Elgg plugin) require authentication since these information could be set to specific access roles by the content owner.</p>
 <p>The Groovy scripts that will retrieve the data from the API, manipulate and clean (removing JavaScript and HTML, organizing the data to conform to the Solr schema configuration, etc) the information before it is push and commited to the Solr instance for indexing. The said scripts will be managed on the dedicated search server, which will be run on a daily basis as a crontab on Linux, or scheduler on Windows.</p>
-<p>``
-&#64;TODO</p>
-<ul class="simple">
-<li>Groovy scripts allow parameter to specify Solr and REST API URL or IP Address</li>
-<li>Create snippet of commands to start up Kubernetes, Docker, or manual set up</li>
-<li>Develop more in depth workflow diagram (data flow)</li>
-</ul>
-<p><a href="#id1"><span class="problematic" id="id2">``</span></a></p>
+<div class="highlight-python"><div class="highlight"><pre>@TODO
+
+- Groovy scripts allow parameter to specify Solr and REST API URL or IP Address
+- Create snippet of commands to start up Kubernetes, Docker, or manual set up
+- Develop more in depth workflow diagram (data flow)
+</pre></div>
+</div>
 </div>
 <div class="section" id="dependencies-and-requirements">
 <h2>Dependencies and Requirements<a class="headerlink" href="#dependencies-and-requirements" title="Permalink to this headline">¶</a></h2>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut dictum diam fermentum accumsan commodo. Suspendisse ut imperdiet leo. Vivamus quis cursus elit. Vestibulum vestibulum sapien at enim tincidunt tempor. Suspendisse potenti. Vivamus nec ornare diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec facilisis turpis. Pellentesque nunc nisi, tincidunt eget cursus quis, auctor imperdiet erat. Morbi quis mauris ligula. Suspendisse metus nunc, vulputate in rutrum non, vehicula vitae dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla arcu augue, placerat nec sem nec, aliquet placerat erat. Integer rutrum lectus eget massa fermentum, et lacinia sem tincidunt. Etiam id erat diam. Fusce metus dui, tristique eu justo eu, finibus aliquam nisl.</p>
+<p>This project was developed on Ubuntu Server 16 LTS, on VMWare Workstation 14 Player and tested on the Azure Cloud (excluding Kubernetes, which are managed differently on the cloud than on the local instance). There may be additional steps that are required to run it on a Windows environment.</p>
 <p>Since there is a Dockerfile included within this repository, all the dependencies will be automatically included into the project.
 The dockerfile includes the following dependencies (the versions may change over time).
 This instance of Solr within a Docker and orchestrated by local instance of Kubernetes was developed on Ubuntu Server 16 LTS. This docker repository can be found at <a class="reference external" href="https://hub.docker.com/r/pandurx/solr-service/">https://hub.docker.com/r/pandurx/solr-service/</a>.</p>
@@ -161,6 +160,12 @@ This instance of Solr within a Docker and orchestrated by local instance of Kube
 </tr>
 </tbody>
 </table>
+<div class="highlight-python"><div class="highlight"><pre>@TODO
+
+- Implementation on new versions of Ubuntu Server (or other distribution)
+- Implementation on Windows environment
+</pre></div>
+</div>
 </div>
 <div class="section" id="installation-and-implementation">
 <h2>Installation and Implementation<a class="headerlink" href="#installation-and-implementation" title="Permalink to this headline">¶</a></h2>

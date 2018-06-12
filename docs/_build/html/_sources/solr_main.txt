@@ -31,20 +31,18 @@ In the diagram above, we have the web application server that is connected to bo
 
 The Groovy scripts that will retrieve the data from the API, manipulate and clean (removing JavaScript and HTML, organizing the data to conform to the Solr schema configuration, etc) the information before it is push and commited to the Solr instance for indexing. The said scripts will be managed on the dedicated search server, which will be run on a daily basis as a crontab on Linux, or scheduler on Windows.
 
-``
-@TODO
+::
 
-- Groovy scripts allow parameter to specify Solr and REST API URL or IP Address
-- Create snippet of commands to start up Kubernetes, Docker, or manual set up
-- Develop more in depth workflow diagram (data flow)
-``
+    @TODO
 
+    - Groovy scripts allow parameter to specify Solr and REST API URL or IP Address
+    - Create snippet of commands to start up Kubernetes, Docker, or manual set up
+    - Develop more in depth workflow diagram (data flow)
 
 
 Dependencies and Requirements
 -----------------------------
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut dictum diam fermentum accumsan commodo. Suspendisse ut imperdiet leo. Vivamus quis cursus elit. Vestibulum vestibulum sapien at enim tincidunt tempor. Suspendisse potenti. Vivamus nec ornare diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec facilisis turpis. Pellentesque nunc nisi, tincidunt eget cursus quis, auctor imperdiet erat. Morbi quis mauris ligula. Suspendisse metus nunc, vulputate in rutrum non, vehicula vitae dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla arcu augue, placerat nec sem nec, aliquet placerat erat. Integer rutrum lectus eget massa fermentum, et lacinia sem tincidunt. Etiam id erat diam. Fusce metus dui, tristique eu justo eu, finibus aliquam nisl.
-
+This project was developed on Ubuntu Server 16 LTS, on VMWare Workstation 14 Player and tested on the Azure Cloud (excluding Kubernetes, which are managed differently on the cloud than on the local instance). There may be additional steps that are required to run it on a Windows environment.
 
 Since there is a Dockerfile included within this repository, all the dependencies will be automatically included into the project.
 The dockerfile includes the following dependencies (the versions may change over time). 
@@ -77,6 +75,13 @@ This instance of Solr within a Docker and orchestrated by local instance of Kube
 +---------------------------------+---------------------------------------------------------------------+
 | Updated on June 1 2018                                                                                |
 +-------------------------------------------------------------------------------------------------------+
+
+::
+
+    @TODO
+
+    - Implementation on new versions of Ubuntu Server (or other distribution)
+    - Implementation on Windows environment
 
 
 Installation and Implementation
