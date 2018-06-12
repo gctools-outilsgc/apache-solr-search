@@ -72,7 +72,7 @@
 <li>/kubernetes-configuration-files/ contains the kubernetes configuration files that will be required to deploy in a pod</li>
 </ul>
 <p>The idea for this project was converting the Solr instance into service which will then be managed in Kubernetes. This service will require access to files and REST API in order to index the content on the site as well as being able to search the contents within various documents (including .pdf, .doc, .docx, etc). The way it works is that the REST API will provide a more accurate content data without scraping an entire web page with all the excess JavaScript and HTML code and pushed to the Solr instance for indexing. This will help with results manipulation when it is displayed on the front end (can be tested using the ReactJS application) as well as retrieving data that would only be available to the user (if access roles are implemented). Please see the groovy scripts, the elgg plugin solr_api for a more in depth technical information, and the diagram below for the workflow.</p>
-<img alt="_images/basic_server_architecture.PNG" src="_images/basic_server_architecture.PNG" />
+<img alt="_images/network_diagram.PNG" src="_images/network_diagram.PNG" />
 <p>In the diagram above, we have the web application server that is connected to both the database server and FTP file server. The web application server will contain the REST API that will be used to retrieve data from either the database and links to files from the FTP server. The APIs (implemented as an Elgg plugin) require authentication since these information could be set to specific access roles by the content owner.</p>
 <p>The Groovy scripts that will retrieve the data from the API, manipulate and clean (removing JavaScript and HTML, organizing the data to conform to the Solr schema configuration, etc) the information before it is push and commited to the Solr instance for indexing. The said scripts will be managed on the dedicated search server, which will be run on a daily basis as a crontab on Linux, or scheduler on Windows.</p>
 <div class="highlight-python"><div class="highlight"><pre>@TODO
@@ -86,9 +86,10 @@
 <div class="section" id="dependencies-and-requirements">
 <h2>Dependencies and Requirements<a class="headerlink" href="#dependencies-and-requirements" title="Permalink to this headline">¶</a></h2>
 <p>This project was developed on Ubuntu Server 16 LTS, on VMWare Workstation 14 Player and tested on the Azure Cloud (excluding Kubernetes, which are managed differently on the cloud than on the local instance). There may be additional steps that are required to run it on a Windows environment.</p>
+<p><strong>Please note that if you need to update Apache Tika (for file scraping), you will be required to install Apache Maven to get the .jar files to replace the old instance that comes with Apache Solr.</strong></p>
 <p>Since there is a Dockerfile included within this repository, all the dependencies will be automatically included into the project.
 The dockerfile includes the following dependencies (the versions may change over time).
-This instance of Solr within a Docker and orchestrated by local instance of Kubernetes was developed on Ubuntu Server 16 LTS. This docker repository can be found at <a class="reference external" href="https://hub.docker.com/r/pandurx/solr-service/">https://hub.docker.com/r/pandurx/solr-service/</a>.</p>
+This instance of Solr within a Docker and orchestrated by local instance of Kubernetes was developed on Ubuntu Server 16 LTS. This docker repository can be found at <a class="reference external" href="https://hub.docker.com/r/pandurx/solr-service/">https://hub.docker.com/r/pandurx/solr-service/</a>. The table as followed contains the minimum requirement</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="32%" />
@@ -103,7 +104,7 @@ This instance of Solr within a Docker and orchestrated by local instance of Kube
 <tr class="row-even"><td><ul class="first last simple">
 <li>Ubuntu Server 16 LTS</li>
 <li>4GB RAM</li>
-<li>100GB ROM</li>
+<li>100GB Hard Drive Disk Space</li>
 <li>VMware Workstation 14 Player</li>
 </ul>
 </td>
@@ -167,38 +168,114 @@ This instance of Solr within a Docker and orchestrated by local instance of Kube
 </pre></div>
 </div>
 </div>
-<div class="section" id="installation-and-implementation">
-<h2>Installation and Implementation<a class="headerlink" href="#installation-and-implementation" title="Permalink to this headline">¶</a></h2>
-<p>Maecenas vehicula dapibus odio, in faucibus dolor fringilla nec. Mauris vestibulum urna erat, a sodales est viverra at. Sed libero nulla, sodales nec maximus vel, pretium quis tortor. Fusce tellus eros, vehicula ut imperdiet mollis, finibus iaculis enim. Donec id mi mauris. Suspendisse molestie elementum feugiat. Nullam et interdum odio, vestibulum placerat arcu. Fusce laoreet, lacus ut ullamcorper mollis, leo odio gravida ex, pulvinar vestibulum felis tellus ac arcu. Integer nec enim cursus, tristique risus quis, volutpat velit. Aenean pretium elit eros, non hendrerit mauris euismod ac. Ut vitae posuere tellus, nec lobortis ligula. Duis arcu mi, suscipit non dui vel, ullamcorper imperdiet lectus.</p>
-<div class="section" id="installing-docker">
-<h3>Installing Docker<a class="headerlink" href="#installing-docker" title="Permalink to this headline">¶</a></h3>
-<p>Nam ut risus id ipsum blandit semper in sit amet ipsum. Ut tincidunt, justo at sagittis venenatis, turpis enim blandit metus, sit amet tempus lacus ex in turpis. Phasellus vitae aliquet quam, ultrices laoreet sapien. Cras varius ipsum nec enim porttitor sagittis. Quisque varius lacus pellentesque accumsan vestibulum. Integer nisi risus, maximus ut blandit in, finibus non nunc. Ut id eros et erat laoreet ornare malesuada sed risus. Mauris efficitur porttitor tempus. Donec odio neque, bibendum ac tempus non, viverra ac quam. Mauris malesuada luctus ultricies. Donec non lacus sagittis, fermentum libero ut, venenatis sapien. Aliquam semper varius orci. Donec eu odio porttitor, bibendum metus ullamcorper, hendrerit dui. Aenean sed placerat neque, in posuere nisl.</p>
-<p>Nullam sed sagittis lorem. Curabitur mattis ut quam sit amet ultricies. Praesent eget tristique ex. Sed dignissim mauris nec nisi feugiat, eu euismod odio semper. Maecenas quis posuere ante. Sed quis egestas lorem. Aliquam non arcu sit amet leo dapibus interdum. Vestibulum id blandit eros, id porttitor erat. Pellentesque vitae ipsum et risus ornare vulputate aliquet vulputate nisi. Quisque sed faucibus magna, a aliquam mauris. Nulla sapien ligula, dapibus sed venenatis laoreet, rhoncus vitae quam. Suspendisse nec quam ultrices, rhoncus lacus nec, cursus lorem. Mauris maximus quam ante, hendrerit porta nulla porta quis. Fusce porta diam ut diam imperdiet imperdiet.</p>
+<div class="section" id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>Lets get started with some information for each of the directories included in this repository:</p>
+<ul class="simple">
+<li>docker-configuration-files: contains the Dockerfile needed to create and run the container for Solr</li>
+<li>docs: contains the documentation for the entire project, it is currently hosted and can be viewed here</li>
+<li>elgg-plugin: contains the plugin that can be installed on an elgg instance, it basically generates REST API that retrieves all the contents and displays it in json format</li>
+<li>kubernetes-configuration-files: contains all the files required to run the project in a pod</li>
+<li>search-portal-app: contains the reactjs project that formats the search results thats retrieved from solr</li>
+<li>solr-configuration-files: contains the groovy scripts that will be run for indexing and the core that will be used to organize the index</li>
+</ul>
+<div class="section" id="running-docker-container">
+<h3>Running Docker Container<a class="headerlink" href="#running-docker-container" title="Permalink to this headline">¶</a></h3>
+<p>The dockerfile is in the docker-configuration-files directory, run the following commands to build and run:</p>
+<div class="highlight-python"><div class="highlight"><pre># install docker ce**
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+$ sudo add-apt-repository &quot;deb [arch=amd-] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable&quot;
+$ sudo apt-get update
+$ apt-cache policy docker-ce
+$ sudo apt-get install -y docker-ce
+$ sudo systemctl status docker
+
+# run docker container
+$ docker build -t search-portal
+$ run --name solr-portal -d -f solr-portal
+
+# display status of the container(s)
+$ docker ps
+</pre></div>
+</div>
 </div>
 <div class="section" id="installing-kubernetes-local-virtual-machine-optional">
 <h3>Installing Kubernetes (local virtual machine, optional)<a class="headerlink" href="#installing-kubernetes-local-virtual-machine-optional" title="Permalink to this headline">¶</a></h3>
-<p>Nam ut risus id ipsum blandit semper in sit amet ipsum. Ut tincidunt, justo at sagittis venenatis, turpis enim blandit metus, sit amet tempus lacus ex in turpis. Phasellus vitae aliquet quam, ultrices laoreet sapien. Cras varius ipsum nec enim porttitor sagittis. Quisque varius lacus pellentesque accumsan vestibulum. Integer nisi risus, maximus ut blandit in, finibus non nunc. Ut id eros et erat laoreet ornare malesuada sed risus. Mauris efficitur porttitor tempus. Donec odio neque, bibendum ac tempus non, viverra ac quam. Mauris malesuada luctus ultricies. Donec non lacus sagittis, fermentum libero ut, venenatis sapien. Aliquam semper varius orci. Donec eu odio porttitor, bibendum metus ullamcorper, hendrerit dui. Aenean sed placerat neque, in posuere nisl.</p>
-<p>Nullam sed sagittis lorem. Curabitur mattis ut quam sit amet ultricies. Praesent eget tristique ex. Sed dignissim mauris nec nisi feugiat, eu euismod odio semper. Maecenas quis posuere ante. Sed quis egestas lorem. Aliquam non arcu sit amet leo dapibus interdum. Vestibulum id blandit eros, id porttitor erat. Pellentesque vitae ipsum et risus ornare vulputate aliquet vulputate nisi. Quisque sed faucibus magna, a aliquam mauris. Nulla sapien ligula, dapibus sed venenatis laoreet, rhoncus vitae quam. Suspendisse nec quam ultrices, rhoncus lacus nec, cursus lorem. Mauris maximus quam ante, hendrerit porta nulla porta quis. Fusce porta diam ut diam imperdiet imperdiet.</p>
+<p>This section is still being written, please note that this portion of the project was tested and implemented on a local instance of Kubernetes.</p>
+<div class="highlight-python"><div class="highlight"><pre># install kubernetes
+$ apt-get install
+
+# run kubernetes pod deployment
+$ kubectl portal-service --image=portal-service --port=-- --host=XXXX
+
+# remove and clean up the service
+$ kubectl kill portal-service-###
+$ kubectl delete deployment portal-service
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>@TODO
+
+- Implementation on new versions of Ubuntu Server (or other distribution)
+- Implementation on Windows environment
+</pre></div>
 </div>
 </div>
-<div class="section" id="commands-explained">
-<h2>Commands Explained<a class="headerlink" href="#commands-explained" title="Permalink to this headline">¶</a></h2>
-<p>Maecenas vehicula dapibus odio, in faucibus dolor fringilla nec. Mauris vestibulum urna erat, a sodales est viverra at. Sed libero nulla, sodales nec maximus vel, pretium quis tortor. Fusce tellus eros, vehicula ut imperdiet mollis, finibus iaculis enim. Donec id mi mauris. Suspendisse molestie elementum feugiat. Nullam et interdum odio, vestibulum placerat arcu. Fusce laoreet, lacus ut ullamcorper mollis, leo odio gravida ex, pulvinar vestibulum felis tellus ac arcu. Integer nec enim cursus, tristique risus quis, volutpat velit. Aenean pretium elit eros, non hendrerit mauris euismod ac. Ut vitae posuere tellus, nec lobortis ligula. Duis arcu mi, suscipit non dui vel, ullamcorper imperdiet lectus.</p>
+</div>
+<div class="section" id="manual-management">
+<h2>Manual Management<a class="headerlink" href="#manual-management" title="Permalink to this headline">¶</a></h2>
 <p>If you are currently logged in as root user on the linux machine, you might run into an error stating that you cannot start the solr service as that user. Typically, it is much safer to run the solr server with a different user account that has only access necessary directories and the access rights to run specific services that is required for the search functionality.</p>
 <p>If the search engine is currently in development or testing, the service can be started with a root user with an additional parameter passed in. Otherwise, omit the <tt class="docutils literal"><span class="pre">-f</span></tt> flag if the service will be started with a non-root user.</p>
-<p><strong>Please take note that the script to run the engine is in the ``/opt/solr/bin`` directory. The example below assumes that the the solr script is in the current directory</strong></p>
-<p>running solr as a root user</p>
-<p><tt class="docutils literal"><span class="pre">root&#64;ubuntu:~#</span> <span class="pre">./solr</span> <span class="pre">start</span> <span class="pre">-f</span></tt></p>
-<p><tt class="docutils literal"><span class="pre">root&#64;ubuntu:~#</span> <span class="pre">./solr</span> <span class="pre">stop</span></tt></p>
-<p><tt class="docutils literal"><span class="pre">root&#64;ubuntu:~#</span> <span class="pre">./solr</span> <span class="pre">restart</span> <span class="pre">-f</span></tt></p>
-<p>running solr as a non-root user</p>
-<p><tt class="docutils literal"><span class="pre">solr&#64;ubuntu:~#</span> <span class="pre">./solr</span> <span class="pre">start</span></tt></p>
+<p><strong>Please note that the script to run the engine is in the ``/opt/solr/bin`` directory for the Ubuntu Server environment.</strong></p>
+<div class="highlight-python"><div class="highlight"><pre># install nodejs
+################
+$ curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
+$ sudo bash nodesource_setup.sh
+$ apt-get install nodejs
+$ npm -v
+
+# compile the code
+$ npm install -g create-react-app
+$ create-react-app search-portal
+$ cd search-portal/
+
+# start the application
+$ npm start
+
+# to import libraries, they must be in the npm repository
+$ npm install --save react-fontawesome
+
+
+# installing apache groovy
+##########################
+$ curl -s get.sdkman.io | bash
+$ source &quot;$HOME/.sdkman/bin/sdkman-init.sh&quot;
+$ sdk install groovy
+
+# running groovy scripts
+$ groovy script-name-here.groovy
+
+
+# installing solr on Ubuntu Server
+##################################
+# in your home directory, download the solr package from their official site and unzip
+$ wget http://httpd-mirror.sergal.org/apache/lucene/solr/7.3.0/solr-7.3.0.tgz --no-proxy -q
+$ tar -xf solr-7.3.0.tgz
+$ mv solr-7.3.0 solr &amp;&amp; mv solr /opt/
+
+# move the configuration file (that is included in this repository) to the solr engine
+$ mv elgg-core /opt/solr/server/solr/
+
+# on an instance of linux, the solr app files are all located within /opt/solr/
+$ cd /opt/solr/bin
+
+# if currently logged into Ubuntu as a non-root user, omit the -f flag
+$ ./solr start -f
+$ ./solr stop
+
+Waiting up to 180 seconds to see Solr running on port 8983 [-]
+Started Solr server on port 8983 (pid=22624). Happy searching!
+</pre></div>
 </div>
-<div class="section" id="inline-markup">
-<h2><strong>Inline Markup</strong><a class="headerlink" href="#inline-markup" title="Permalink to this headline">¶</a></h2>
-<p>Words can have <em>emphasis in italics</em> or be <strong>bold</strong> and you can define
-code samples with back quotes, like when you talk about a command: <tt class="docutils literal"><span class="pre">sudo</span></tt>
-gives you super user powers!</p>
 </div>
 </div>
 
@@ -213,13 +290,12 @@ gives you super user powers!</p>
 <li><a class="reference internal" href="#">Apache Solr Search</a><ul>
 <li><a class="reference internal" href="#overview-and-summary">Overview and Summary</a></li>
 <li><a class="reference internal" href="#dependencies-and-requirements">Dependencies and Requirements</a></li>
-<li><a class="reference internal" href="#installation-and-implementation">Installation and Implementation</a><ul>
-<li><a class="reference internal" href="#installing-docker">Installing Docker</a></li>
+<li><a class="reference internal" href="#getting-started">Getting Started</a><ul>
+<li><a class="reference internal" href="#running-docker-container">Running Docker Container</a></li>
 <li><a class="reference internal" href="#installing-kubernetes-local-virtual-machine-optional">Installing Kubernetes (local virtual machine, optional)</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#commands-explained">Commands Explained</a></li>
-<li><a class="reference internal" href="#inline-markup"><strong>Inline Markup</strong></a></li>
+<li><a class="reference internal" href="#manual-management">Manual Management</a></li>
 </ul>
 </li>
 </ul>
