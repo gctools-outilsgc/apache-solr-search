@@ -53,15 +53,36 @@
 <h1>Apache Solr Search<a class="headerlink" href="#apache-solr-search" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="overview-and-summary">
 <h2>Overview and Summary<a class="headerlink" href="#overview-and-summary" title="Permalink to this headline">¶</a></h2>
-<p>Documentation can also be referenced in the <cite>Github repository &lt;https://github.com/gctools-outilsgc/apache-solr-search&gt;</cite></p>
-<p>This entire project will contain small components that can be used for testing as minimal viable products. It is not required to have everything running, the main files that this project will use will be in the solr-configuration-files/:
-* /elgg-core/ contains the solr core configuration files that is required to be placed within /opt/solr/server/solr/ and will need the directory /index/ to be created. The entire directory will need to be accessed by solr, root access can be possible if the instance is created in the development environment.
-* /groovy-scripts/ contains the script that will retrieve json data from the web application through REST API and push it into the Solr search engine to create index
-* /jar-files/ contains missing jar files that solr may be missing, there may be some errors that could come up after a fresh install of the engine</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut dictum diam fermentum accumsan commodo. Suspendisse ut imperdiet leo. Vivamus quis cursus elit. Vestibulum vestibulum sapien at enim tincidunt tempor. Suspendisse potenti. Vivamus nec ornare diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas nec facilisis turpis. Pellentesque nunc nisi, tincidunt eget cursus quis, auctor imperdiet erat. Morbi quis mauris ligula. Suspendisse metus nunc, vulputate in rutrum non, vehicula vitae dolor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla arcu augue, placerat nec sem nec, aliquet placerat erat. Integer rutrum lectus eget massa fermentum, et lacinia sem tincidunt. Etiam id erat diam. Fusce metus dui, tristique eu justo eu, finibus aliquam nisl.</p>
-<p>Mauris id vehicula leo, non aliquam eros. Suspendisse imperdiet lorem quis mauris pulvinar, vitae fringilla massa ultrices. Donec a leo non felis hendrerit tristique vel sit amet mauris. Fusce non pharetra libero. Nulla in augue quis ipsum blandit gravida. Nunc at ex dictum, venenatis odio eu, suscipit enim. Donec facilisis ante vitae leo viverra, quis tempus sapien fringilla. Morbi fermentum feugiat dolor. Phasellus mattis id tortor eget aliquet. Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam a lacus ante. Nunc non iaculis odio, ut consectetur erat. Integer ac tempor ipsum, at dapibus quam. Sed diam nibh, eleifend vitae malesuada in, lobortis at mauris. Duis eu lorem erat. Proin est leo, porta sed augue rhoncus, luctus finibus odio.</p>
+<p>Documentation can also be referenced in the <a class="reference external" href="https://github.com/gctools-outilsgc/apache-solr-search">Github repository</a></p>
+<p>Official Documentatioon for some of the components mentioned in this documentation:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://lucene.apache.org/solr/guide/7_3">Apache Solr</a></li>
+<li><a class="reference external" href="https://docs.docker.com/install/linux/docker-ce/ubuntu/#prerequisites">Docker Community Edition</a></li>
+<li><a class="reference external" href="https://kubernetes.io/docs/home/?path=users&amp;persona=app-developer&amp;level=foundational">Kubernetes</a></li>
+</ul>
+<p>This entire project will contain small components that can be used for testing as minimal viable products. It is not required to have everything running, the main files that this project will use will be in the solr-configuration-files/:</p>
+<ul class="simple">
+<li>/elgg-core/ contains the solr core configuration files that is required to be placed within /opt/solr/server/solr/ and will need the directory /index/ to be created. The entire directory will need to be accessed by solr, root access can be possible if the instance is created in the development environment.</li>
+<li>/groovy-scripts/ contains the script that will retrieve json data from the web application through REST API and push it into the Solr search engine to create index</li>
+<li>/jar-files/ contains missing jar files that solr may be missing, there may be some errors that could come up after a fresh install of the engine</li>
+</ul>
+<p>There are also other configuration files to be considered if the instance will be deployed as either in a Kubernetes pod or as Docker containers, which can be found in the following:</p>
+<ul class="simple">
+<li>/docker-configuration-files/ contains the Dockerfile that will be required to deploy containers</li>
+<li>/kubernetes-configuration-files/ contains the kubernetes configuration files that will be required to deploy in a pod</li>
+</ul>
+<p>The idea for this project was converting the Solr instance into service which will then be managed in Kubernetes. This service will require access to files and REST API in order to index the content on the site as well as being able to search the contents within various documents (including .pdf, .doc, .docx, etc). The way it works is that the REST API will provide a more accurate content data without scraping an entire web page with all the excess JavaScript and HTML code and pushed to the Solr instance for indexing. This will help with results manipulation when it is displayed on the front end (can be tested using the ReactJS application) as well as retrieving data that would only be available to the user (if access roles are implemented). Please see the groovy scripts, the elgg plugin solr_api for a more in depth technical information, and the diagram below for the workflow.</p>
 <img alt="_images/basic_server_architecture.PNG" src="_images/basic_server_architecture.PNG" />
-<p>Maecenas vehicula dapibus odio, in faucibus dolor fringilla nec. Mauris vestibulum urna erat, a sodales est viverra at. Sed libero nulla, sodales nec maximus vel, pretium quis tortor. Fusce tellus eros, vehicula ut imperdiet mollis, finibus iaculis enim. Donec id mi mauris. Suspendisse molestie elementum feugiat. Nullam et interdum odio, vestibulum placerat arcu. Fusce laoreet, lacus ut ullamcorper mollis, leo odio gravida ex, pulvinar vestibulum felis tellus ac arcu. Integer nec enim cursus, tristique risus quis, volutpat velit. Aenean pretium elit eros, non hendrerit mauris euismod ac. Ut vitae posuere tellus, nec lobortis ligula. Duis arcu mi, suscipit non dui vel, ullamcorper imperdiet lectus.</p>
+<p>In the diagram above, we have the web application server that is connected to both the database server and FTP file server. The web application server will contain the REST API that will be used to retrieve data from either the database and links to files from the FTP server. The APIs (implemented as an Elgg plugin) require authentication since these information could be set to specific access roles by the content owner.</p>
+<p>The Groovy scripts that will retrieve the data from the API, manipulate and clean (removing JavaScript and HTML, organizing the data to conform to the Solr schema configuration, etc) the information before it is push and commited to the Solr instance for indexing. The said scripts will be managed on the dedicated search server, which will be run on a daily basis as a crontab on Linux, or scheduler on Windows.</p>
+<p>``
+&#64;TODO</p>
+<ul class="simple">
+<li>Groovy scripts allow parameter to specify Solr and REST API URL or IP Address</li>
+<li>Create snippet of commands to start up Kubernetes, Docker, or manual set up</li>
+<li>Develop more in depth workflow diagram (data flow)</li>
+</ul>
+<p><a href="#id1"><span class="problematic" id="id2">``</span></a></p>
 </div>
 <div class="section" id="dependencies-and-requirements">
 <h2>Dependencies and Requirements<a class="headerlink" href="#dependencies-and-requirements" title="Permalink to this headline">¶</a></h2>
@@ -80,10 +101,7 @@ This instance of Solr within a Docker and orchestrated by local instance of Kube
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>&nbsp;</td>
-<td>&nbsp;</td>
-</tr>
-<tr class="row-odd"><td><ul class="first last simple">
+<tr class="row-even"><td><ul class="first last simple">
 <li>Ubuntu Server 16 LTS</li>
 <li>4GB RAM</li>
 <li>100GB ROM</li>
