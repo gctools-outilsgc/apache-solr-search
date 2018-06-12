@@ -199,8 +199,8 @@ $ docker ps
 </pre></div>
 </div>
 </div>
-<div class="section" id="installing-kubernetes-local-virtual-machine-optional">
-<h3>Installing Kubernetes (local virtual machine, optional)<a class="headerlink" href="#installing-kubernetes-local-virtual-machine-optional" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="running-in-kubernetes">
+<h3>Running in Kubernetes<a class="headerlink" href="#running-in-kubernetes" title="Permalink to this headline">¶</a></h3>
 <p>This section is still being written, please note that this portion of the project was tested and implemented on a local instance of Kubernetes.</p>
 <div class="highlight-python"><div class="highlight"><pre># install kubernetes
 $ apt-get install
@@ -220,9 +220,8 @@ $ kubectl delete deployment portal-service
 </pre></div>
 </div>
 </div>
-</div>
-<div class="section" id="manual-management">
-<h2>Manual Management<a class="headerlink" href="#manual-management" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="running-as-is">
+<h3>Running As-is<a class="headerlink" href="#running-as-is" title="Permalink to this headline">¶</a></h3>
 <p>If you are currently logged in as root user on the linux machine, you might run into an error stating that you cannot start the solr service as that user. Typically, it is much safer to run the solr server with a different user account that has only access necessary directories and the access rights to run specific services that is required for the search functionality.</p>
 <p>If the search engine is currently in development or testing, the service can be started with a root user with an additional parameter passed in. Otherwise, omit the <tt class="docutils literal"><span class="pre">-f</span></tt> flag if the service will be started with a non-root user.</p>
 <p><strong>Please note that the script to run the engine is in the ``/opt/solr/bin`` directory for the Ubuntu Server environment.</strong></p>
@@ -278,6 +277,7 @@ Started Solr server on port 8983 (pid=22624). Happy searching!
 </div>
 </div>
 </div>
+</div>
 
 
           </div>
@@ -292,10 +292,10 @@ Started Solr server on port 8983 (pid=22624). Happy searching!
 <li><a class="reference internal" href="#dependencies-and-requirements">Dependencies and Requirements</a></li>
 <li><a class="reference internal" href="#getting-started">Getting Started</a><ul>
 <li><a class="reference internal" href="#running-docker-container">Running Docker Container</a></li>
-<li><a class="reference internal" href="#installing-kubernetes-local-virtual-machine-optional">Installing Kubernetes (local virtual machine, optional)</a></li>
+<li><a class="reference internal" href="#running-in-kubernetes">Running in Kubernetes</a></li>
+<li><a class="reference internal" href="#running-as-is">Running As-is</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#manual-management">Manual Management</a></li>
 </ul>
 </li>
 </ul>

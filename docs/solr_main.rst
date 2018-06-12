@@ -122,8 +122,8 @@ The dockerfile is in the docker-configuration-files directory, run the following
 
 
 
-Installing Kubernetes (local virtual machine, optional)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Running in Kubernetes
+^^^^^^^^^^^^^^^^^^^^^
 This section is still being written, please note that this portion of the project was tested and implemented on a local instance of Kubernetes.
 
 ::
@@ -147,8 +147,8 @@ This section is still being written, please note that this portion of the projec
     - Implementation on Windows environment
 
 
-Manual Management
------------------
+Running As-is
+^^^^^^^^^^^^^
 If you are currently logged in as root user on the linux machine, you might run into an error stating that you cannot start the solr service as that user. Typically, it is much safer to run the solr server with a different user account that has only access necessary directories and the access rights to run specific services that is required for the search functionality.
 
 If the search engine is currently in development or testing, the service can be started with a root user with an additional parameter passed in. Otherwise, omit the ``-f`` flag if the service will be started with a non-root user.
