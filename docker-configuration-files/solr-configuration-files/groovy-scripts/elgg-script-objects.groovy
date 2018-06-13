@@ -2,6 +2,12 @@ import groovy.json.JsonSlurper
 import groovy.json.JsonBuilder
 
 // @TODO retrieve from user input for the URLs
+def siteAddr = this.args[0]
+def solrAddr = this.args[1]
+
+
+println "site address: " + siteAddr + " // solr address: " + solrAddr
+
 
 
 def subtypes = ["file", "comment", "blog", "thewire", "album", "image", "groupforumtopic", "page_top", "event_calendar", "hjforumtopic", "bookmarks", "poll", "idea", "page", "question"]
@@ -15,7 +21,7 @@ for (subtype in subtypes) {
 	// the list displays 10 entities each time will need to "paginate"
 	while (!end_loop) {
 
-		URL apiURL = new URL("http://192.168.1.18/gcconnex/services/api/rest/json/?method=get.entity_list&type=object&subtype=$subtype&offset=$offset&api_key=4d09e3b4dd0276e9308cf88740a34d62923a55d9")
+		URL apiURL = new URL("$siteAddr/gcconnex/services/api/rest/json/?method=get.entity_list&type=object&subtype=$subtype&offset=$offset&api_key=4d09e3b4dd0276e9308cf88740a34d62923a55d9")
 		println "offset: $offset" 
 
 		def slurper = new JsonSlurper()
@@ -75,14 +81,16 @@ for (subtype in subtypes) {
 				"date_created": "$result.date_created",
 				"date_modified": "$result.date_modified",
 				"url" : "$result.url",
-				"platform": "elgg"
+				//"platform": "elgg"
 			])
 
-			def process = [ 'bash', '-c', "curl -v -k -X POST -H \"Content-Type: application/json\" --data-binary '" + json_string.toString() + "' http://192.168.1.18:8983/solr/elgg-core/update/json/docs?commit=true" ].execute().text
+			def process = [ 'bash', '-c', "curl -v -k -X POST -H \"Content-Type: application/json\" --data-binary '" + json_string.toString() + "' $solrAddr/solr/elgg-core/update/json/docs?commit=true" ].execute().text
 
+			println process
 		}
 		offset = offset + 10
 	}
 }
+
 
 
