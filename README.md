@@ -213,12 +213,45 @@ $ docker ps
 # install kubernetes
 $ apt-get install
 
+swapoff -a 	#disable swap
+# we are using flannel as our virtual network
+kubeadm init --pod-network-cidr=10.244.0.0/16
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+You can now join any number of machines by running the following on each node
+as root:
+
+  kubeadm join --token 3e0a6b.501f5895e6e1a9df 192.168.1.65:6443 --discovery-token-ca-cert-hash sha256:ae12de632770aa36c88cf33ae0f64a6400362a321d88a21e3612adc7a84e40b2
+
+
+
+mkdir -p $HOME/.kube
+
+# remove existing configuration, this may cause problem later on
+rm /root/.kube/config
+
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+sysctl net.bridge.bridge-nf-call-iptables=1
+
 # run kubernetes pod deployment
 $ kubectl portal-service --image=portal-service --port=-- --host=XXXX
 
 # remove and clean up the service
 $ kubectl kill portal-service-###
 $ kubectl delete deployment portal-service
+
+kubeadm reset
 ```
 
 

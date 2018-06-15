@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: solr-service
-        image: pandurx/solr-service:latest
+        image: pandurx/solr:latest
         resources:
           requests:
             cpu: 100m
