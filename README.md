@@ -196,6 +196,13 @@ $ run --name solr-portal -d -f solr-portal
 $ docker ps
 ```
 
+```
+@TODO
+- for groovy scripts, the parameters are groovy-script [site address] [solr address] [api-key]
+- in the cronjob file, the addresses and api key must be changed to work in your architecture
+```
+
+
 ## Using Kubernetes
 
 ### Prerequisites

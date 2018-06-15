@@ -255,32 +255,18 @@ function get_entity_list($type, $subtype, $offset) {
 	));
 
 	foreach ($entities as $entity) {
-
-
+		
 		if (is_Json($entity->title)) {
-			$title_array = json_decode($entity->title, true);
-			if (!isset($title_array['en']) || !isset($title_array['fr'])) {
-				$title_array['en'] = str_replace('"', '\"', $title_array);
-				$title_array['fr'] = str_replace('"', '\"', $title_array);
-			} else {
-				$title_array['en'] = str_replace('"', '\"', gc_explode_translation($entity->title, 'en'));
-				$title_array['fr'] = str_replace('"', '\"', gc_explode_translation($entity->title, 'fr'));
-			}
-
+			$title_array['en'] = str_replace('"', '\"', gc_explode_translation($entity->title, 'en'));
+			$title_array['fr'] = str_replace('"', '\"', gc_explode_translation($entity->title, 'fr'));
 		} else {
 			$title_array['en'] = $entity->title;
 			$title_array['fr'] = $entity->title;
 		}
 
 		if (is_Json($entity->description)) {
-			$description_array = json_decode($entity->description, true);
-			if (!isset($description_array['en']) || !isset($description_array['fr'])) {
-				$description_array['en'] = str_replace('"', '\"', $description_array);
-				$description_array['fr'] = str_replace('"', '\"', $description_array);
-			} else {
-				$description_array['en'] = str_replace('"', '\"', gc_explode_translation($entity->description, 'en'));
-				$description_array['fr'] = str_replace('"', '\"', gc_explode_translation($entity->description, 'fr'));
-			}
+			$description_array['en'] = str_replace('"', '\"', gc_explode_translation($entity->description, 'en'));
+			$description_array['fr'] = str_replace('"', '\"', gc_explode_translation($entity->description, 'fr'));
 		} else {
 			$description_array['en'] = $entity->description;
 			$description_array['fr'] = $entity->description;
