@@ -2,22 +2,23 @@
 import groovy.json.JsonSlurper
 import groovy.json.JsonBuilder
 
-def end_loop = false
+def siteAddr = this.args[0]
+def solrAddr = this.args[1]
+def api_key = this.args[2]
+
+println "Site Address: " + siteAddr + " | Solr Address: " + solrAddr
+
 def offset = 0
 
-while (!end_loop) {
+while (true) {
 
-	// retrieve all users
-	URL apiURL = new URL("http://192.168.1.18/gcconnex/services/api/rest/json/?method=get.user_list&offset=$offset&api_key=4d09e3b4dd0276e9308cf88740a34d62923a55d9")
+	URL apiURL = new URL("$siteAddr/services/api/rest/json/?method=get.user_list&offset=$offset&api_key=$api_key")
 
 	def slurper = new JsonSlurper()
 	def api_response = slurper.parseText(apiURL.text)
 	def results = api_response.result
 
-	if (results == null) {
-		end_loop = true
-		break
-	}
+	if (results == null) break
 
 	for (result in results) {
 
@@ -27,7 +28,6 @@ while (!end_loop) {
 		def text_en = "$name $result.email $result.username" 
 		def text_fr = "$name $result.email $result.username"
 
-		// build the json string and curl post to solr
 		def json_string = new JsonBuilder([
 			"guid": result.guid, 
 			"name": "$name", 
@@ -38,15 +38,12 @@ while (!end_loop) {
 			"email": "$result.email",
 			"date_created": "$result.date_created",
 			"date_modified": "$result.date_modified",
-			"platform": "elgg"
+			"platform": "$result.platform"
 		])
 
-		def process = [ 'bash', '-c', "curl -v -k -X POST -H \"Content-Type: application/json\" --data-binary '" + json_string.toString() + "' http://192.168.1.18:8983/solr/elgg-core/update/json/docs?commit=true" ].execute().text
+		def process = [ 'bash', '-c', "curl -v -k -X POST -H \"Content-Type: application/json\" --data-binary '" + json_string.toString() + "' $solrAddr/solr/elgg-core/update/json/docs?commit=true" ].execute().text
 
-		println json_string.toString()
-		println process
-		println "----------------------"
-		//http://192.168.1.18:8983/solr/elgg-core/select?q=title:please&q=description:please
+		println "$result.subtype | $offset | $result.guid | " + process
 	}
 	offset = offset + 10
 }

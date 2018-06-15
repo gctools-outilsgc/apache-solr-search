@@ -1,0 +1,3 @@
+* * * * * root /groovy/bin/groovy /usr/scripts/elgg-script-objects.groovy http://192.168.1.18/gcconnex http://192.168.1.65:32768 4d09e3b4dd0276e9308cf88740a34d62923a55d9 >> /var/log/cron.log 2>&1
+* * * * * root /groovy/bin/groovy /usr/scripts/elgg-script-users.groovy http://192.168.1.18/gcconnex http://192.168.1.65:32768 4d09e3b4dd0276e9308cf88740a34d62923a55d9 >> /var/log/cron.log 2>&1
+* * * * * root /groovy/bin/groovy /usr/scripts/elgg-script-groups.groovy http://192.168.1.18/gcconnex http://192.168.1.65:32768 4d09e3b4dd0276e9308cf88740a34d62923a55d9 >> /var/log/cron.log 2>&1
