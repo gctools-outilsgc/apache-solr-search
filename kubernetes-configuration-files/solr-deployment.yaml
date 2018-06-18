@@ -12,7 +12,7 @@ spec:
       app: solr
 
   # run 2 pods matching the template
-  #replicas: 2
+  replicas: 2
 
   # create pods using the pod definition in this template
   template:

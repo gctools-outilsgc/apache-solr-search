@@ -195,6 +195,7 @@ $ docker ps
 $ docker exec -it solr-service bash
 
 # after logging into the docker container, modify the cronjob file then start service
+# for the groovy scripts, the parameters are in this order : groovy indexing-script.groovy site-addr solr-addr api-key
 $ nano /etc/cron/cron.d/groovy-cron
 $ service cron start
  * Starting periodic command scheduler cron                                                                                                                                         [ OK ]
@@ -207,13 +208,6 @@ $ docker kill 6e21d435f3be
 $ docker rm solr-service
 ```
 
-```
-@TODO
-- for groovy scripts, the parameters are groovy-script [site address] [solr address] [api-key]
-- in the cronjob file, the addresses and api key must be changed to work in your architecture
-```
-
-
 ## Using Kubernetes
 
 ### Prerequisites
@@ -221,8 +215,6 @@ $ docker rm solr-service
 * docker-compose
 * kubectl
 * kubeadm
-
-**This is still work in progress**
 
 ```
 # install kubernetes
@@ -233,9 +225,48 @@ $ nano /etc/apt/sources.list.d/kubernetes.list
 $ apt-get update
 $ apt-get install -y kubelet kubeadm kubectl kubernetes-cni
 
-$ swapoff -a 	#disable swap
+# starting up kubernetes
+# disable swap
+$ swapoff -a
 # we are using flannel as our virtual network
 $ kubeadm init --pod-network-cidr=10.244.0.0/16
+
+[init] Using Kubernetes version: v1.9.8
+[init] Using Authorization modes: [Node RBAC]
+[preflight] Running pre-flight checks.
+        [WARNING SystemVerification]: docker version is greater than the most recently validated version. Docker version: 17.12.1-ce. Max validated version: 17.03
+        [WARNING FileExisting-crictl]: crictl not found in system path
+[certificates] Generated ca certificate and key.
+[certificates] Generated apiserver certificate and key.
+[certificates] apiserver serving cert is signed for DNS names [ubuntu kubernetes kubernetes.default kubernetes.default.svc kubernetes.default.svc.cluster.local] and IPs [10.96.0.1 192.168.1.65]
+[certificates] Generated apiserver-kubelet-client certificate and key.
+[certificates] Generated sa key and public key.
+[certificates] Generated front-proxy-ca certificate and key.
+[certificates] Generated front-proxy-client certificate and key.
+[certificates] Valid certificates and keys now exist in "/etc/kubernetes/pki"
+[kubeconfig] Wrote KubeConfig file to disk: "admin.conf"
+[kubeconfig] Wrote KubeConfig file to disk: "kubelet.conf"
+[kubeconfig] Wrote KubeConfig file to disk: "controller-manager.conf"
+[kubeconfig] Wrote KubeConfig file to disk: "scheduler.conf"
+[controlplane] Wrote Static Pod manifest for component kube-apiserver to "/etc/kubernetes/manifests/kube-apiserver.yaml"
+[controlplane] Wrote Static Pod manifest for component kube-controller-manager to "/etc/kubernetes/manifests/kube-controller-manager.yaml"
+[controlplane] Wrote Static Pod manifest for component kube-scheduler to "/etc/kubernetes/manifests/kube-scheduler.yaml"
+[etcd] Wrote Static Pod manifest for a local etcd instance to "/etc/kubernetes/manifests/etcd.yaml"
+[init] Waiting for the kubelet to boot up the control plane as Static Pods from directory "/etc/kubernetes/manifests".
+[init] This might take a minute or longer if the control plane images have to be pulled.
+[apiclient] All control plane components are healthy after 210.005277 seconds
+[uploadconfig] Storing the configuration used in ConfigMap "kubeadm-config" in the "kube-system" Namespace
+[markmaster] Will mark node ubuntu as master by adding a label and a taint
+[markmaster] Master ubuntu tainted and labelled with key/value: node-role.kubernetes.io/master=""
+[bootstraptoken] Using token: 1c91b2.3f5d23cf8ce4e820
+[bootstraptoken] Configured RBAC rules to allow Node Bootstrap tokens to post CSRs in order for nodes to get long term certificate credentials
+[bootstraptoken] Configured RBAC rules to allow the csrapprover controller automatically approve CSRs from a Node Bootstrap Token
+[bootstraptoken] Configured RBAC rules to allow certificate rotation for all node client certificates in the cluster
+[bootstraptoken] Creating the "cluster-info" ConfigMap in the "kube-public" namespace
+[addons] Applied essential addon: kube-dns
+[addons] Applied essential addon: kube-proxy
+
+Your Kubernetes master has initialized successfully!
 
 To start using your cluster, you need to run the following as a regular user:
 
@@ -263,12 +294,53 @@ $ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 $ sysctl net.bridge.bridge-nf-call-iptables=1
 
-# run kubernetes pod deployment
-$ kubectl portal-service --image=portal-service --port=-- --host=XXXX
+# check all the pods and untaint the node 
+$ kubectl get pods --all-namespaces
+$ kubectl taint nodes ubuntu node-role.kubernetes.io/master:NoSchedule-
 
-# remove and clean up the service
-$ kubectl kill portal-service-###
-$ kubectl delete deployment portal-service
+# install flannel
+$ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.9.1/Documentation/kube-flannel.yml
+
+# install and deploy dashboard ui
+$ kubectl create -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
+
+# create user accounts
+$ kubectl create clusterrolebinding cluster-syste --clusterrole=cluster-admin --user=system:serviceaccount
+$ kubectl create clusterrolebinding cluster-system-anonymous --clusterrole=cluster-admin --user=system:anonymous
+$ kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --user=system:serviceaccount:kube-system:kubernetes-dashboard
+
+# create the deployment from the .yaml file
+$ kubectl create -f solr-deployment.yaml
+$ kubectl get deployments
+
+NAME              DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
+solr-deployment   2         2         2            2           7m
+
+$ kubectl get pods
+
+NAME                              READY     STATUS    RESTARTS   AGE
+solr-deployment-95dfb5d8f-hzdk5   1/1       Running   0          7m
+solr-deployment-95dfb5d8f-p9vn5   1/1       Running   0          7m
+
+# run kubernetes pod deployment (ports and hosts can be specified in parameters)
+$ kubectl solr-service --image=pandurx/solr
+$ kubectl solr-service --image=pandurx/solr --port=80 --host=192.168.0.1
+
+# expose the service then accessing it remotely
+$ kubectl expose deployment solr-deployment --type=LoadBalancer --name=my-service
+
+service "my-service" exposed
+
+$ kubectl get services my-service
+
+NAME         TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+my-service   LoadBalancer   10.107.208.248   <pending>     8983:32338/TCP   9s
+
+Accessing the service in the browser by going to : http://192.168.1.65:32338/solr/#/
+
+# kill and delete deployment
+$ kubectl kill portal-service-79b5ddd677-js7d7 X
+$ kubectl delete deployment -l app=solr
 
 kubeadm reset
 ```
