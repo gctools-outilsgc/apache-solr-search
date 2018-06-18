@@ -1,24 +1,24 @@
 FROM phusion/baseimage 
 LABEL maintainer="pandurx <internalfire5@live.com>"
 
-RUN apt-get -qq update
-RUN apt-get -qq -y install default-jre
-RUN apt-get -qq -y install default-jdk
-RUN apt-get -qq -y install wget
-RUN apt-get -qq -y install unzip
-RUN apt-get -qq -y install lsof
-RUN apt-get -qq -y install nano
-RUN apt-get -qq -y install tar
-RUN apt-get -qq -y install cron
-RUN apt-get -qq -y install zip
-RUN apt-get -qq -y install unzip
-RUN apt-get -qq -y install bash
+RUN apt-get -qq update && apt-get install -y \
+default-jre \
+default-jdk \
+wget \
+unzip \
+lsof \
+nano \
+tar \
+cron \
+zip \
+unzip \
+bash
 
 
 # installing groovy
 RUN cd /tmp && \
     wget https://bintray.com/artifact/download/groovy/maven/apache-groovy-binary-2.5.0.zip && \
-    unzip -q apache-groovy-binary-2.5.0.zip && ls && \
+    unzip -q apache-groovy-binary-2.5.0.zip && \
     mv groovy-2.5.0 /groovy && \
     rm apache-groovy-binary-2.5.0.zip
 
@@ -37,12 +37,15 @@ RUN mkdir /opt/solr/
 
 
 # installing solr
-RUN wget http://apache.mirror.gtcomm.net/lucene/solr/7.3.1/solr-7.3.1.tgz --no-proxy -q && tar -xf solr-7.3.1.tgz && mv solr-7.3.1 solr && mv solr/ /opt/
+RUN wget http://apache.mirror.gtcomm.net/lucene/solr/7.3.1/solr-7.3.1.tgz --no-proxy && \
+    tar -xf solr-7.3.1.tgz && \
+    mv solr-7.3.1 solr && \
+    mv solr/ /opt/
 
-ADD /solr-configuration-files/elgg-core /opt/solr/server/elgg-core/
-RUN mkdir /opt/solr/server/elgg-core/data
+ADD /solr-configuration-files/elgg-core /opt/solr/server/solr/elgg-core
+RUN mkdir /opt/solr/server/solr/elgg-core/data
 
-RUN chmod -R 777 /opt/solr/server/elgg-core/
+RUN chmod -R 777 /opt/solr/server/solr/elgg-core/
 RUN chmod -R 777 /opt/solr/bin/
 
 
