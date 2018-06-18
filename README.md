@@ -2,21 +2,15 @@
 
 [![Build Status](https://travis-ci.org/Services-Sandbox/solr.svg?branch=master)](https://travis-ci.org/Services-Sandbox/solr)
 
-[Full documentation can be found here](https://apache-solr-search.readthedocs.io/en/latest/)
 
-**For official documentations of all the libraries that are used for this instance of Apache Solr, see the list below.**
 
-[Apache Solr](http://lucene.apache.org/solr/guide/--)
+For more information about this project-repository, the [documentation can be found here](https://apache-solr-search.readthedocs.io/en/latest/) as the readme file will contain summaries of each portion of the project. For official documentation of the libraries used in this project, please consult the table as follows:
 
-   This is the main engine that will index the contents and store in the elgg-core directory within the data folder. Solr must have access to this core in order to store index and log warnings and errors. The configuration file is located within the solr-configuration-files directory.
-
-[Docker Community Edition](https://docs.docker.com/install/linux/docker-ce/ubuntu/#prerequisites)
-	
-   This instance has been configured to run inside a Docker container that contains all the dependencies and libraries that are used. The Dockerfile can be found in docker-configuration-files.
-
-[Kubernetes](https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational)
-	
-   Still in process to be worked on, but there are configuration files for Kubernetes deployment developed, it can be found in the kubernetes-configuration-files directory.
+| Technology | Description |
+|------------|-------------|
+| [Apache Solr](http://lucene.apache.org/solr/guide/--) | This is the main engine that will index the contents and store in the elgg-core directory within the data folder. Solr must have access to this core in order to store index and log warnings and errors. The configuration file is located within the solr-configuration-files directory.|
+| [Docker Community Edition](https://docs.docker.com/install/linux/docker-ce/ubuntu/#prerequisites) |    This instance has been configured to run inside a Docker container that contains all the dependencies and libraries that are used. The Dockerfile can be found in docker-configuration-files. |
+| [Kubernetes](https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational) |  Still in process to be worked on, but there are configuration files for Kubernetes deployment developed, it can be found in the kubernetes-configuration-files directory. |
 
 
 ## Specifications and Dependencies
@@ -338,11 +332,17 @@ my-service   LoadBalancer   10.107.208.248   <pending>     8983:32338/TCP   9s
 
 Accessing the service in the browser by going to : http://192.168.1.65:32338/solr/#/
 
+# get the pod name(s) and then ssh into the service
+# it is required to modify the scripts so that it knows where to index and where to commit the index
+$ kubectl get pods --all-namespaces
+$ kubectl exec -it solr-deployment-95dfb5d8f-hzdk5 -- /bin/bash
+
 # kill and delete deployment
 $ kubectl kill portal-service-79b5ddd677-js7d7 X
 $ kubectl delete deployment -l app=solr
 
-kubeadm reset
+# stop the kubernetes cluster
+$ kubeadm reset
 ```
 
 
