@@ -3,7 +3,6 @@
 [![Build Status](https://travis-ci.org/Services-Sandbox/solr.svg?branch=master)](https://travis-ci.org/Services-Sandbox/solr)
 
 
-
 For more information about this project-repository, the [documentation can be found here](https://apache-solr-search.readthedocs.io/en/latest/) as the readme file will contain summaries of each portion of the project. For official documentation of the libraries used in this project, please consult the table as follows:
 
 | Technology | Description |
@@ -12,6 +11,12 @@ For more information about this project-repository, the [documentation can be fo
 | [Docker Community Edition](https://docs.docker.com/install/linux/docker-ce/ubuntu/#prerequisites) |    This instance has been configured to run inside a Docker container that contains all the dependencies and libraries that are used. The Dockerfile can be found in docker-configuration-files. |
 | [Kubernetes](https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational) |  Still in process to be worked on, but there are configuration files for Kubernetes deployment developed, it can be found in the kubernetes-configuration-files directory. |
 
+
+###### Sections
+
+* [Setting up this project using Docker containers](https://github.com/Services-Sandbox/solr#using-docker)
+* [Setting up this project using Kubernetes](https://github.com/Services-Sandbox/solr#using-kubernetes)
+* [Setting up this project manually](https://github.com/Services-Sandbox/solr#optional-manual-installation-without-docker-or-kubernetes)
 
 ## Specifications and Dependencies
 
@@ -103,6 +108,9 @@ This is optional, if you like to design how the results should be displayed you 
 To get started with the ReachJS application, you need to be in the search-portal directory.
 
 ```
+# install package management
+$ apt install npm
+
 # install nodejs
 $ curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
 $ sudo bash nodesource_setup.sh
@@ -348,12 +356,13 @@ $ kubeadm reset
 
 ## Contribution
 
-Contributions are welcomed
+I encourage anyone who would like to use this repository
 
 
 ## Todo
 
-- create gitignore file
-- automate configurations for different ip addresses/url
-- create test scripts
+- [] create gitignore file
+- [] automate configurations for different ip addresses/url
+- [] create test scripts
+- [] enable CORS on Apache/or any web server (issue with reactjs retrieving data)
 
