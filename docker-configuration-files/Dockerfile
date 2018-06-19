@@ -48,6 +48,8 @@ RUN mkdir /opt/solr/server/solr/elgg-core/data
 RUN chmod -R 777 /opt/solr/server/solr/elgg-core/
 RUN chmod -R 777 /opt/solr/bin/
 
+RUN sed '/<Directory \/var\/www\/>/a \\tHeader set Access-Control-Allow-Origin "*"' /etc/apache2/apache2.conf
+RUN a2enmod headers
 
 # set up task scheduler
 RUN touch /etc/cron.d/groovy-cron
