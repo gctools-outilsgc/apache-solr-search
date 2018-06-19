@@ -52,6 +52,9 @@ RUN cp /opt/solr/server/solr-webapp/webapp/WEB-INF/web.xml solr-web-bkup.xml
 ADD /solr-configuration-files/solr-web.xml /opt/solr/server/solr-webapp/webapp/WEB-INF/
 RUN mv /opt/solr/server/solr-webapp/webapp/WEB-INF/solr-web.xml /opt/solr/server/solr-webapp/webapp/WEB-INF/web.xml
 
+ADD /solr-configuration-files/solr-configuration-files/jar-files/jetty-servlets-9.4.11.v20180605.jar /opt/solr/server/solr-webapp/webapp/WEB-INF/lib/
+ADD /solr-configuration-files/solr-configuration-files/jar-files/jetty-util-9.4.11.v20180605.jar /opt/solr/server/solr-webapp/webapp/WEB-INF/lib/
+
 #RUN sed '/<Directory \/var\/www\/>/a \\tHeader set Access-Control-Allow-Origin "*"' /etc/apache2/apache2.conf
 #RUN a2enmod headers
 
@@ -61,6 +64,8 @@ RUN touch /etc/cron.d/groovy-cron
 ADD /solr-configuration-files/groovy-scripts/crontab /etc/cron.d/groovy-cron
 RUN chmod 0644 /etc/cron.d/groovy-cron
 RUN touch /var/log/cron.log
+
+RUN service cron start
 
 # house keeping then expose the application
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
