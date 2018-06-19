@@ -325,7 +325,7 @@ solr-deployment-95dfb5d8f-hzdk5   1/1       Running   0          7m
 solr-deployment-95dfb5d8f-p9vn5   1/1       Running   0          7m
 
 # run kubernetes pod deployment (ports and hosts can be specified in parameters)
-$ kubectl solr-service --image=pandurx/solr
+$ kubectl solr-service --image=pandurx/solr X
 $ kubectl solr-service --image=pandurx/solr --port=80 --host=192.168.0.1
 
 # expose the service then accessing it remotely
